@@ -1,0 +1,16 @@
+{% extends 'agreement/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row mb-2">
+  <div class="col-sm-6">
+    <h1 class="m-0 text-dark">Advance Payment Line</h1>
+  </div>
+</div>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" value='save' class="btn btn-primary">Add Advance Payment line</button>
+  </form>
+{% endblock %}
