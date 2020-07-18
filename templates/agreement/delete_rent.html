@@ -1,0 +1,60 @@
+{% extends 'agreement/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Delete Rent Data</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+            <div class="row">
+              <div class="col-sm-12">
+
+
+                <!-- <h1>Agreement Id: {{ agreement.from_line_date }}</h1> -->
+                {% for rent in rent %}
+                <h3>Rent Id: {{ rent.id }}</h3>
+                <h3>Rent Start Period: {{ rent.start_period }}</h3>
+                <h3>Rent End Period: {{ rent.end_period }}</h3>
+                <h3>Rent Month: {{ rent.total_months }}</h3>
+                <h3>Rent Per Month: {{ rent.rent_per_month }}</h3>
+
+                <a href="/rent_delete_view_new/{{ rent.id }}/" >Delete</a>
+
+             {% endfor %}
+
+              </div>
+            </div>
+
+
+
+  <!-- /.row -->
+</section>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+
+<!-- <div class="row mb-2">
+  <div class="col-sm-6">
+    <h1 class="m-0 text-dark">Delete</h1>
+  </div>
+</div>
+  <form method="POST">
+    {% csrf_token %}
+
+
+    <button type="submit" value='save' class="btn btn-primary">Delete</button>
+
+  </form>
+
+
+{% endblock %} -->

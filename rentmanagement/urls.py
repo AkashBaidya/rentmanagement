@@ -35,14 +35,25 @@ from rentmanagement.views import agreement_view
 from rentmanagement.views import sites_view
 from rentmanagement.views import properties_view
 from rentmanagement.views import person_view
+from rentmanagement.views import error_view
 from rentmanagement.views import agreement_detail_view
 
 from rentmanagement.views import rent_input_view
+from rentmanagement.views import rent_input_view_new
+from rentmanagement.views import rent_delete_view
+from rentmanagement.views import rent_delete_view_new
+from rentmanagement.views import advance_delete_view
+from rentmanagement.views import advance_delete_view_new
+from rentmanagement.views import adv_input_view_new
 from rentmanagement.views import rent_detail_view
 from rentmanagement.views import advance_input_view
 from rentmanagement.views import advance_detail_view
 from rentmanagement.views import security_input_view
 from rentmanagement.views import security_detail_view
+from rentmanagement.views import sites_edit_view
+from rentmanagement.views import person_edit_view
+from rentmanagement.views import agreement_detail_view_agrm
+from rentmanagement.views import agreement_edit_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -51,15 +62,27 @@ urlpatterns = [
     url( r'^login/$',auth_views.LoginView.as_view(template_name="agreement/login.html"), name="login"),
     path('dashboard/',dashboard_view,name='dashboard_view'),
     path('sites_input_view/',sites_input_view,name='sites_input_view'),
+    url(r'^sites_edit_view/?(?P<id>[^/]+)/$', sites_edit_view, name="sites_edit_view"),
+    url(r'^person_edit_view/?(?P<id>[^/]+)/$', person_edit_view, name="person_edit_view"),
+    url(r'^rent_delete_view/?(?P<id>[^/]+)/$', rent_delete_view, name="rent_delete_view"),
+    url(r'^rent_delete_view_new/?(?P<id>[^/]+)/$', rent_delete_view_new, name="rent_delete_view_new"),
+    url(r'^advance_delete_view/?(?P<id>[^/]+)/$', advance_delete_view, name="advance_delete_view"),
+    url(r'^advance_delete_view_new/?(?P<id>[^/]+)/$', advance_delete_view_new, name="advance_delete_view_new"),
     path('sites/',sites_view,name='sites_view'),
     path('person_input/',person_input_view,name='person_input_view'),
     path('person/',person_view,name='person_view'),
+    path('error/',error_view,name='error_view'),
     path('property_input/',property_input_view,name='property_input_view'),
     path('property/',properties_view,name='properties_view'),
     path('agreement/',agreement_input_view,name='agreement_input_view'),
+    url(r'^agreement_edit/?(?P<id>[^/]+)/$', agreement_edit_view, name="agreement_edit_view"),
+    # path('agreement_edit/',agreement_edit_view,name='agreement_edit_view'),
     path('agreement_result/',agreement_view,name='agreement_view'),
     url(r'^agreement/?(?P<pk>[^/]+)/$', agreement_detail_view, name="agreement_detail_view"),
+    url(r'^agreement_rent/(?P<pk>\d+)/$', agreement_detail_view_agrm, name="agreement_detail_view_agrm"),
     url(r'^rents/?(?P<ag>[^/]+)/$', rent_detail_view, name="rent_detail_view"),
+    url(r'^rent_input_view_new/?(?P<id>[^/]+)/$', rent_input_view_new, name="rent_input_view_new"),
+    url(r'^adv_input_view_new/?(?P<id>[^/]+)/$', adv_input_view_new, name="adv_input_view_new"),
     path('rent_input_view/',rent_input_view,name='rent_input_view'),
     url(r'^securities/?(?P<ag>[^/]+)/$', security_detail_view, name="rent_security_view"),
     path('security_input_view/',security_input_view,name='security_input_view'),

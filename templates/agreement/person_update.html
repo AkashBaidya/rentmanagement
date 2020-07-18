@@ -1,0 +1,21 @@
+{% extends 'agreement/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row mb-2">
+  <div class="col-sm-6">
+    <h1 class="m-0 text-dark">Person</h1>
+  </div>
+</div>
+<!-- <button id='dealing_person'type="submit" value='add' class="btn btn-primary">Add Dealing Person</button> -->
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button type="submit" value='save' class="btn btn-primary">Update Person</button>
+
+  </form>
+
+
+{% endblock %}

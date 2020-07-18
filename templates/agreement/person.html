@@ -3,14 +3,48 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        function hideInputs() {
+            $("#div_id_name_of_dealing_person").hide();
+            $("#div_id_email_of_dealing_person").hide();
+            $("#div_id_phone_number_of_dealing_person").hide();
+            $("#div_id_relationship").hide();
+        }
+
+        $("#dealing_person").on('click', function(){
+            // var val = $("u#id_support").val();
+            // if (val == 'amc') {
+            $("#div_id_name_of_dealing_person").show();
+            $("#div_id_email_of_dealing_person").show();
+            $("#div_id_phone_number_of_dealing_person").show();
+            $("#div_id_relationship").show();
+            // } else if (val == 'warranty') {
+            //     $("#id_warranty_date").show();
+            //     $("#id_warranty_product_list").show();
+            // } else {
+            //     hideInputs();
+            // }
+        });
+
+        hideInputs();
+    });
+  </script>
 <div class="row mb-2">
   <div class="col-sm-6">
     <h1 class="m-0 text-dark">Person</h1>
   </div>
 </div>
+<button id='dealing_person'type="submit" value='add' class="btn btn-primary">Add Dealing Person</button>
   <form method="POST">
     {% csrf_token %}
     {{ form|crispy }}
+
     <button type="submit" value='save' class="btn btn-primary">Add Person</button>
+
   </form>
+
+
 {% endblock %}
