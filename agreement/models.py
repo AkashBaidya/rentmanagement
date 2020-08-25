@@ -107,14 +107,15 @@ class Agreement(models.Model):
     total_months=models.IntegerField(default=1)
     file_no=models.CharField(max_length=8)
     main_site=models.ForeignKey(Site,on_delete=models.CASCADE)
-    agrement_advance_amount=models.IntegerField()
-    agrement_security_amount=models.CharField(max_length=1000000)
+    agrement_advance_amount=models.DecimalField(null=True,max_digits=30,decimal_places=4)
+    agrement_security_amount=models.DecimalField(null=True,max_digits=30,decimal_places=4)
     employee_id=models.CharField(max_length=10,blank=True)
     employee_name=models.CharField(max_length=30,blank=True)
     employee_designation=models.CharField(max_length=50,blank=True)
     employee_phone_number=models.CharField(max_length=15,blank=True)
     employee_email=models.EmailField(max_length=30,blank=True)
     status=models.CharField(max_length=10,blank=True)
+    interest_rate=models.DecimalField(null=True,max_digits=30,decimal_places=4)
     properties=models.ForeignKey(Properties,on_delete=models.CASCADE,blank=True)
 
     def __str__(self):
@@ -133,8 +134,9 @@ class Rentline(models.Model):
     rent_rule_no=models.CharField(max_length=10)
     start_period=models.DateField(null=True)
     end_period=models.DateField(null=True)
-    rent_per_month=models.CharField(null=True,max_length=30)
+    rent_per_month=models.DecimalField(null=True,max_digits=30,decimal_places=4)
     total_months=models.IntegerField()
+    advance_agreement_per_month=models.DecimalField(null=True,max_digits=30,decimal_places=4)
     # total_amount=models.IntegerField(null=True)
     agreement_ref=models.ForeignKey(Agreement,on_delete=models.CASCADE,related_name='rentline',null=True, blank=True)
 

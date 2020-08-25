@@ -57,7 +57,7 @@ class RentlineForm(forms.ModelForm):
     # print(RentlineForm)
     class Meta:
         model = Rentline
-        fields = ['rent_rule_no','start_period','end_period','total_months','rent_per_month']
+        fields = ['rent_rule_no','start_period','end_period','total_months','rent_per_month','advance_agreement_per_month']
         # widgets={
         #     'agreement_ref':RentlineForm.hiddenInput(),
         # }

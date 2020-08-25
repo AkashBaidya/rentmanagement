@@ -28,6 +28,8 @@ from django.core import validators
 
 from django.db.models import Sum
 
+import numpy as np
+
 
 # Create your views here.
 def dashboard_view(request):
@@ -49,6 +51,11 @@ def sites_edit_view(request,id):
     else:
         messages.success(request,"Please try again")
     return render(request, 'agreement/sites.html', {'form': form})
+
+
+
+
+
 def rent_delete_view(request,id):
     # obj=get_object_or_404(Rentline,id=id)
     rent= Rentline.objects.filter(id=id)
@@ -417,6 +424,8 @@ def agreement_view(request):
     all_agreement = Agreement.objects.all()
     return render(request, 'agreement/agreement_result.html', {'all_agreement': all_agreement})
 def agreement_detail_view(request,pk):
+
+    rent_rou=total_rou_calculation(pk)
     # agreement = get_object_or_404(Agreement,id=pk)
     agreement=Agreement.objects.prefetch_related('rentline').get(id=pk)
 
@@ -429,7 +438,7 @@ def agreement_detail_view(request,pk):
     print(advance)
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
-    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance})
+    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou})
 def agreement_detail_view_agrm(request,pk):
     # agreement = get_object_or_404(Agreement,id=pk)
     agreement=Agreement.objects.prefetch_related('rentline').get(agrm_id=pk)
@@ -471,3 +480,41 @@ def person_view(request):
     # return render(request, 'sites.html', {
     #     'form': form_class,
     # })
+
+
+def total_rou_calculation(pk):
+
+    #get agreement related rent objects
+
+    e = Agreement.objects.get(id=pk)
+    count=e.rentline.all().count()
+    b=e.rentline.all()
+
+
+
+
+    # print(len(b))
+    month=0;
+    total_pv=0;
+
+    for i in b.values_list():
+
+        # print(i[4])
+        present_value=np.pv(.10/12,int(i[5]),-(int(i[4])-int(i[6])),0)
+        # print(present_value)
+
+        rate=.10/12
+        future_value=present_value/(1+rate)**month
+        # print("hash")
+        # print(future_value)
+        total_pv=total_pv+future_value
+        # print("hash")
+        month=month+i[5]
+
+    print(total_pv)
+    print(e.agrement_advance_amount)
+
+    total_rou=total_pv+int(e.agrement_advance_amount)
+    print(total_rou)
+
+    return total_rou
