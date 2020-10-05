@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'agreement',
     'crispy_forms',
     'bootstrap_datepicker_plus',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 ROOT_URLCONF = 'rentmanagement.urls'
 
@@ -123,7 +127,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 
-# 
+#
 # LOGIN_REDIRECT_URL='/dashboard/'
 
 LOGIN_URL= "/login/"
