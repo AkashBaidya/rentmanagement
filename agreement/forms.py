@@ -1,4 +1,9 @@
+
+# from bootstrap3_datetime.widgets import DateTimePicker
 from django import forms
+from bootstrap_datepicker_plus import DatePickerInput
+
+
 
 from .models import Site
 from .models import Person
@@ -11,16 +16,16 @@ from .models import AdvancePaymentline
 class SiteForm(forms.ModelForm):
     class Meta:
         model = Site
-        fields = ['site_code', 'site_ext','site_desc','primary_area','secondary_area','tertiary_area','site_size','district','site_type','entry_date']
+        fields = []
 
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'person_type','type','nid','email','phone','address','hasbankinfo','sis_supplier_code','name_of_dealing_person','email_of_dealing_person','phone_number_of_dealing_person','relationship']
+        fields = []
 class PropertyForm(forms.ModelForm):
     class Meta:
         model = Properties
-        fields = ['type', 'desc','status','property_size','area','city','district','division','owner1','percentage_of_first_owner','owner2','percentage_of_second_owner','owner3','percentage_of_third_owner','owner4','percentage_of_fourth_owner','owner5','percentage_of_fifth_owner','site1','percentage_of_first_site','site2','percentage_of_second_site','site3','percentage_of_third_site','site4','percentage_of_fourth_site']
+        fields = ['property_size','number_of_owner','owner1','percentage_of_first_owner','owner2','percentage_of_second_owner','owner3','percentage_of_third_owner','owner4','percentage_of_fourth_owner','owner5','percentage_of_fifth_owner','number_of_sites','site1','percentage_of_first_site','site2','percentage_of_second_site','site3','percentage_of_third_site','site4','percentage_of_fourth_site']
         # def clean_recipients(self):
         #     site1 = self.cleaned_data['site1']
         #     print("hello")
@@ -46,9 +51,16 @@ class PropertyForm(forms.ModelForm):
         # this method didn't change it.
 
 class AgreementForm(forms.ModelForm):
+    # agrm_create_date=forms.DateField(input_formats=['%d %m-%Y'])
+    # notice_date= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))
+    # agreement_date= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))
+    # effected_date_as_actual= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))
+    # effected_date_as_per_agreement= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))
+    # expiry_date= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))
     class Meta:
         model = Agreement
-        fields = ['agrm_id','agrm_create_date', 'tenure_month','total_months','eff_date','exp_date','notice_date','notice_period','file','file_no','main_site','agrement_security_amount','agrement_advance_amount','employee_id','employee_name','employee_email','employee_phone_number','employee_designation','properties']
+        fields = ['agrm_id','main_site','properties']
+
 
 class RentlineForm(forms.ModelForm):
     start_period=forms.DateField(input_formats=['%m-%Y'])

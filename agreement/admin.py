@@ -10,6 +10,8 @@ from .models import Rentline
 from .models import Securityline
 # from .models import AdvancePayment
 from .models import AdvancePaymentline
+from .models import LocalArea
+from .models import SingerArea
 # from django.apps import apps
 # models = apps.get_models()
 
@@ -21,6 +23,8 @@ admin.site.register(Properties)
 admin.site.register(Agreement)
 # admin.site.register(Rent)
 admin.site.register(Rentline)
+admin.site.register(LocalArea)
+admin.site.register(SingerArea)
 # admin.site.register(Security)
 admin.site.register(Securityline)
 # admin.site.register(AdvancePayment)

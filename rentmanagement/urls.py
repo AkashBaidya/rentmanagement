@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.conf.urls import url
+from django.contrib.auth import views
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
-from rentmanagement import views
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
 
 from django.contrib.auth import views as auth_views
 from rentmanagement.views import dashboard_view
@@ -55,12 +57,18 @@ from rentmanagement.views import person_edit_view
 from rentmanagement.views import agreement_detail_view_agrm
 from rentmanagement.views import agreement_edit_view
 
+from rentmanagement.views import update_agreement_status_view
+
+from rentmanagement.views import autocomplete_div_view
+from rentmanagement.views import autocomplete_postcode_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('accounts/login/', auth_views.LoginView.as_view(template_name="agreement/login.html"), name='login'),
     # path('accounts/', include('django.contrib.auth.urls')),
     # url(r'^login/$', auth_views.login, {'template_name': 'agreement/login.html'}, name='login'),
     url( r'^login/$',auth_views.LoginView.as_view(template_name="agreement/login.html"), name="login"),
-    path('dashboard/',dashboard_view,name='dashboard_view'),
+    path('accounts/profile/',dashboard_view,name='dashboard_view'),
     path('sites_input_view/',sites_input_view,name='sites_input_view'),
     url(r'^sites_edit_view/?(?P<id>[^/]+)/$', sites_edit_view, name="sites_edit_view"),
     url(r'^person_edit_view/?(?P<id>[^/]+)/$', person_edit_view, name="person_edit_view"),
@@ -69,6 +77,7 @@ urlpatterns = [
     url(r'^advance_delete_view/?(?P<id>[^/]+)/$', advance_delete_view, name="advance_delete_view"),
     url(r'^advance_delete_view_new/?(?P<id>[^/]+)/$', advance_delete_view_new, name="advance_delete_view_new"),
     path('sites/',sites_view,name='sites_view'),
+    path('update_agr_status/<id>/',update_agreement_status_view,name='update_agreement_status_view'),
     path('person_input/',person_input_view,name='person_input_view'),
     path('person/',person_view,name='person_view'),
     path('error/',error_view,name='error_view'),
@@ -88,8 +97,11 @@ urlpatterns = [
     path('security_input_view/',security_input_view,name='security_input_view'),
     url(r'^advancepayments/?(?P<ag>[^/]+)/$', advance_detail_view, name="advance_detail_view"),
     path('advance_input_view/',advance_input_view,name='advance_input_view'),
-    path('success/', views.success, name='success'),
-    url( r'^logout/$',auth_views.LogoutView.as_view(template_name="agreement/login.html"), name="logout"),
+    # path('success/', views.success, name='success'),
+    url(r'^autocomplete_div_view/', autocomplete_div_view,name='autocomplete_div_view'),
+    url(r'^autocomplete_postcode_view/', autocomplete_postcode_view,name='autocomplete_postcode_view'),
+    url( r'^logout/$',auth_views.LogoutView.as_view(), {'next_page': '/'},name="logout"),
+    # url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 
 
     # path('accounts/', include('django.contrib.auth.urls')),

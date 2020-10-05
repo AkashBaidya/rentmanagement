@@ -1,33 +1,7 @@
 {% extends 'agreement/basefile.html' %}
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
 
-  $(document).ready(function(){
-    var table=$('#example2 tr:not(:last) td:last').hide();
-
-
-
-
-
-$('#total_tag').hide();
-$('#status').hide();
-
-
-  });
-
-
-
-
-  function vanish()
-  {
-    var table=$('#example2  td:last').hide();
-    $('#total_tag').show();
-    $('#status').show();
-
-  }
-
-</script>
 <section class="content">
   <div class="row">
     <div class="col-12">
@@ -42,7 +16,7 @@ $('#status').hide();
               <div class="col-sm-12 col-md-12">
 
                 <!-- <a href="{%url 'agreement_input_view' %}"  style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add New Agreement</a> -->
-                <a href="{%url 'rent_input_view_new' id=agreement.id %}"  style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create New Rent Rule</a>
+                <a href="{%url 'rent_input_view_new' id=agreement.id %}" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create New Rent Rule</a>
                 <!-- <a href="/rents/{{ agreement.id }}/" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Rent List</a> -->
                 <!-- <a href="{%url 'security_input_view'   %}"  style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add New Security line</a> -->
                 <!-- <a href="/securities/{{ agreement.id }}/" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Security Line List</a> -->
@@ -63,14 +37,14 @@ $('#status').hide();
                 <h1>Agreement Id: {{ agreement.id }}</h1>
 
 
-                      <p><strong>Agreement Create Date:</strong> {{ agreement.eff_date }}</p>
-                      <p><strong>Agreement Expiry Date:</strong> {{ agreement.exp_date }}</p>
-                      <p><strong>Contact Person</strong> {{ agreement.employee_name}}</p>
-                      <p><strong>Notice Period</strong> {{ agreement.notice_period}}</p>
-                      <p><strong>Shop Name</strong> {{ agreement.main_site}}</p>
+                <p><strong>Agreement Create Date:</strong> {{ agreement.agreement_date }}</p>
+                <p><strong>Agreement Expiry Date:</strong> {{ agreement.expiry_date }}</p>
+                <p><strong>Contact Person</strong> {{ agreement.employee_name}}</p>
+                <p><strong>Notice Date</strong> {{ agreement.notice_date}}</p>
+                <p><strong>Shop Name</strong> {{ agreement.main_site}}</p>
 
-                      <p id="total_tag"><strong>Total ROU</strong> {{ rent_rou }}</p>
-                      <p id="status"><strong>Status</strong> Activated</p>
+                <p id="total_tag"><strong>Total ROU</strong> {{ rent_rou }}</p>
+                <p id="status"><strong>Status</strong> {{agreement.status}}</p>
 
 
               </div>
@@ -87,7 +61,7 @@ $('#status').hide();
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"> End Period</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Rent Per Month</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Advance Adjustment Per Month</th>
-                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Delete Action</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Delete Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -98,7 +72,7 @@ $('#status').hide();
                       <td>{{ rent.end_period}}</td>
                       <td>{{ rent.rent_per_month }}</td>
                       <td>{{ rent.advance_agreement_per_month }}</td>
-                      <td><a href="/rent_delete_view/{{ rent.id }}/" >Delete</a></td>
+                      <td><a href="/rent_delete_view/{{ rent.id }}/">Delete</a></td>
 
                     </tr>
                     {% endfor %}
@@ -120,8 +94,14 @@ $('#status').hide();
 
             <div class="row">
 
+              <!-- <a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Activate</a> -->
 
-              <a onclick="vanish()"  style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Activate</a>
+              {% if agreement.status %}
+
+              {% else %}
+
+<a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Activate</a>
+              {% endif %}
               <!-- <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
               </div> -->
@@ -153,5 +133,58 @@ $('#status').hide();
   </div>
   <!-- /.row -->
 </section>
+
+<script>
+  $(document).ready(function() {
+    var table = $('#example2 tr:not(:last) td:last').hide();
+
+
+
+
+
+    $('#total_tag').hide();
+    // $('#status').hide();
+
+
+  });
+
+  document.getElementById("activate_button").addEventListener("click", vanish, false);
+
+
+  // $.ajaxSetup({
+  //   headers: { "X-CSRFToken": '{{csrf_token}}' }
+  // });
+
+
+  function vanish() {
+    var table = $('#example2  td:last').hide();
+    $('#total_tag').show();
+    $('#status').show();
+    request_url = '/update_agr_status/' + {{agreement.id}} + '/';
+    $.ajax({
+      url: request_url, // the endpoint
+      type: "POST", // http method
+      data: '', // data sent with the post request
+
+      // handle a successful response
+      success: function(json) {
+        // $('#post-text').val(''); // remove the value from the input
+        console.log(json); // log the returned json to the console
+        console.log("success"); // another sanity check
+        window.location.reload(true);
+      },
+
+      // handle a non-successful response
+      error: function(xhr, errmsg, err) {
+
+        // console.log(err);
+        // $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+        //     " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+      }
+    });
+
+  }
+</script>
 
 {% endblock %}

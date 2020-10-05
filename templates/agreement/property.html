@@ -3,14 +3,351 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<!-- <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js" integrity="sha256-6HSLgn6Ao3PKc5ci8rwZfb//5QUu3ge2/Sw9KfLuvr8=" crossorigin="anonymous"></script>
+
+<!-- <script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.js"></script> -->
+
+
+<!-- <script type='application/javascript'>
+  function nameSearch() {
+    $("#tags").autocomplete({
+      source: ["Apple", "Banana"],
+    });
+  }
+</script> -->
+<script type="text/javascript">
+  if (window.jQuery) {
+    // jQuery is available.
+
+    // Print the jQuery version, e.g. "1.0.0":
+    console.log(window.jQuery.fn.jquery);
+  }
+  $(function() {
+    function hideInputs() {
+      // alert("conceptName");
+      $("#div_id_owner1").hide();
+      $("#div_id_percentage_of_first_owner").hide();
+      $("#div_id_owner2").hide();
+      $("#div_id_percentage_of_second_owner").hide();
+      $("#div_id_owner3").hide();
+      $("#div_id_percentage_of_third_owner").hide();
+      $("#div_id_owner4").hide();
+      $("#div_id_percentage_of_fourth_owner").hide();
+      $("#div_id_owner5").hide();
+      $("#div_id_percentage_of_fifth_owner").hide();
+      $("#div_id_site1").hide();
+      $("#div_id_percentage_of_first_site").hide();
+      $("#div_id_site2").hide();
+      $("#div_id_percentage_of_second_site").hide();
+      $("#div_id_site3").hide();
+      $("#div_id_percentage_of_third_site").hide();
+      $("#div_id_site4").hide();
+      $("#div_id_percentage_of_fourth_site").hide();
+
+    }
+
+
+    $("#id_number_of_owner").on('change', function() {
+
+      // alert("hello")
+      var status = $('#id_number_of_owner :selected').text();
+      // alert(status)
+      // alert(typeof(status))
+
+      if (status === '1') {
+        // $("#vanish").show();
+        $("#div_id_owner1").show();
+        $("#div_id_percentage_of_first_owner").show();
+
+      } else if (status === "2") {
+
+        // $("#vanish").show();
+        // alert("changed")
+        $("#div_id_owner1").show();
+        $("#div_id_percentage_of_first_owner").show();
+        $("#div_id_owner2").show();
+        $("#div_id_percentage_of_second_owner").show();
+
+
+
+      } else if (status === '3') {
+
+        // $("#vanish").show();
+        $("#div_id_owner1").show();
+        $("#div_id_percentage_of_first_owner").show();
+        $("#div_id_owner2").show();
+        $("#div_id_percentage_of_second_owner").show();
+        $("#div_id_owner3").show();
+        $("#div_id_percentage_of_third_owner").show();
+
+
+
+      } else if (status === '4') {
+
+        // $("#vanish").show();
+        $("#div_id_owner1").show();
+        $("#div_id_percentage_of_first_owner").show();
+        $("#div_id_owner2").show();
+        $("#div_id_percentage_of_second_owner").show();
+        $("#div_id_owner3").show();
+        $("#div_id_percentage_of_third_owner").show();
+        $("#div_id_owner4").show();
+        $("#div_id_percentage_of_fourth_owner").show();
+
+
+      } else if (status === '5') {
+
+        // $("#vanish").show();
+        $("#div_id_owner1").show();
+        $("#div_id_percentage_of_first_owner").show();
+        $("#div_id_owner2").show();
+        $("#div_id_percentage_of_second_owner").show();
+        $("#div_id_owner3").show();
+        $("#div_id_percentage_of_third_owner").show();
+        $("#div_id_owner4").show();
+        $("#div_id_percentage_of_fourth_owner").show();
+        $("#div_id_owner5").show();
+        $("#div_id_percentage_of_fifth_owner").show();
+
+
+      } else {
+        $("#div_id_owner1").hide();
+        $("#div_id_percentage_of_first_owner").hide();
+        $("#div_id_owner2").hide();
+        $("#div_id_percentage_of_second_owner").hide();
+        $("#div_id_owner3").hide();
+        $("#div_id_percentage_of_third_owner").hide();
+        $("#div_id_owner4").hide();
+        $("#div_id_percentage_of_fourth_owner").hide();
+        $("#div_id_owner5").hide();
+        $("#div_id_percentage_of_fifth_owner").hide();
+      }
+    });
+
+
+
+    $("#id_number_of_sites").on('change', function() {
+
+      // alert("hello")
+      var status = $('#id_number_of_sites :selected').text();
+      // alert(status)
+      // alert(typeof(status))
+
+      if (status === '1') {
+        // $("#vanish").show();
+        $("#div_id_site1").show();
+        $("#div_id_percentage_of_first_site").show();
+
+      } else if (status === "2") {
+
+        // $("#vanish").show();
+        // alert("changed")
+        $("#div_id_site1").show();
+        $("#div_id_percentage_of_first_site").show();
+        $("#div_id_site2").show();
+        $("#div_id_percentage_of_second_site").show();
+
+
+
+      } else if (status === '3') {
+
+        // $("#vanish").show();
+        $("#div_id_site1").show();
+        $("#div_id_percentage_of_first_site").show();
+        $("#div_id_site2").show();
+        $("#div_id_percentage_of_second_site").show();
+        $("#div_id_site3").show();
+        $("#div_id_percentage_of_third_site").show();
+
+
+
+      } else if (status === '4') {
+
+        // $("#vanish").show();
+        $("#div_id_site1").show();
+        $("#div_id_percentage_of_first_site").show();
+        $("#div_id_site2").show();
+        $("#div_id_percentage_of_second_site").show();
+        $("#div_id_site3").show();
+        $("#div_id_percentage_of_third_site").show();
+        $("#div_id_site4").show();
+        $("#div_id_percentage_of_fourth_site").show();
+
+
+      } else {
+        $("#div_id_site1").hide();
+        $("#div_id_percentage_of_first_site").hide();
+        $("#div_id_site2").hide();
+        $("#div_id_percentage_of_second_site").hide();
+        $("#div_id_site3").hide();
+        $("#div_id_percentage_of_third_site").hide();
+        $("#div_id_site4").hide();
+        $("#div_id_percentage_of_fourth_site").hide();
+      }
+      //
+      // var val = $("u#id_support").val();
+      // if (val == 'amc') {
+      // $("#div_id_name_of_dealing_person").show();
+      // $("#div_id_email_of_dealing_person").show();
+      // $("#div_id_phone_number_of_dealing_person").show();
+      // $("#div_id_relationship").show();
+
+      // } else if (val == 'warranty') {
+      //     $("#id_warranty_date").show();
+      //     $("#id_warranty_product_list").show();
+      // } else {
+      //     hideInputs();
+      // }
+    });
+
+    $("#dealing_person").on('click', function() {
+      // var val = $("u#id_support").val();
+      // if (val == 'amc') {
+      $("#div_id_name_of_dealing_person").show();
+      $("#div_id_email_of_dealing_person").show();
+      $("#div_id_phone_number_of_dealing_person").show();
+      $("#div_id_relationship").show();
+      // } else if (val == 'warranty') {
+      // $("#id_warranty_date").show();
+      //     $("#id_warranty_product_list").show();
+      // } else {
+      //     hideInputs();
+      // }
+    });
+
+    hideInputs();
+  });
+</script>
+
+
 <div class="row mb-2">
   <div class="col-sm-6">
     <h1 class="m-0 text-dark">Property</h1>
   </div>
 </div>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" value='save' class="btn btn-primary">Add Property</button>
-  </form>
+<form method="POST">
+  {% csrf_token %}
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Property Details</h3>
+
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_type" class="form-group"> <label for="id_type" class=" requiredField">
+              Type<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="type" maxlength="100" class="textinput textInput form-control" required="" id="id_type"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_desc" class="form-group"> <label for="id_desc" class=" requiredField">
+              Description<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="desc" maxlength="450" class="textinput textInput form-control" required="" id="id_desc"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_status" class="form-group"> <label for="id_status" class=" requiredField">
+              Status<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="status" maxlength="30" class="textinput textInput form-control" required="" id="id_status"> </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_division" class="form-group"> <label for="id_division" class=" requiredField">
+              Division<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="division" maxlength="40" class="textinput textInput form-control" required="" id="id_division" autocomplete="on"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_district" class="form-group"> <label for="id_district" class=" requiredField">
+              District<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="district" maxlength="40" class="textinput textInput form-control" required="" id="id_district"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_thana" class="form-group"> <label for="id_thana" class=" requiredField">
+              Thana<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="thana" maxlength="40" class="textinput textInput form-control" required="" id="id_thana"> </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_postcode" class="form-group"> <label for="id_postcode" class=" requiredField">
+              Postcode<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="postcode" maxlength="40" class="textinput textInput form-control" required="" id="id_postcode"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div id="div_id_village" class="form-group"> <label for="id_village" class=" requiredField">
+              Village<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="village" maxlength="40" class="textinput textInput form-control" required="" id="id_village"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+  
+  {{ form|crispy }}
+
+
+  <button type="submit" value='save' class="btn btn-primary">Add Property</button>
+  <a href="javascript:history.go(-1)" value='cancel' class="btn btn-primary">Cancel</a>
+</form>
 {% endblock %}

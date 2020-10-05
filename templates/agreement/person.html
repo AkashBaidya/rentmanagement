@@ -6,45 +6,324 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        function hideInputs() {
-            $("#div_id_name_of_dealing_person").hide();
-            $("#div_id_email_of_dealing_person").hide();
-            $("#div_id_phone_number_of_dealing_person").hide();
-            $("#div_id_relationship").hide();
-        }
+  $(function() {
+    function hideInputs() {
+      // alert("conceptName");
+      $("#div_id_name_of_dealing_person").hide();
+      $("#div_id_email_of_dealing_person").hide();
+      $("#div_id_phone_number_of_dealing_person").hide();
+      $("#div_id_relationship").hide();
+      $("#vanish").hide();
+    }
 
-        $("#dealing_person").on('click', function(){
-            // var val = $("u#id_support").val();
-            // if (val == 'amc') {
-            $("#div_id_name_of_dealing_person").show();
-            $("#div_id_email_of_dealing_person").show();
-            $("#div_id_phone_number_of_dealing_person").show();
-            $("#div_id_relationship").show();
-            // } else if (val == 'warranty') {
-            //     $("#id_warranty_date").show();
-            //     $("#id_warranty_product_list").show();
-            // } else {
-            //     hideInputs();
-            // }
-        });
+    $("#id_dealing_person_status").on('change', function() {
 
-        hideInputs();
+      // alert("hello")
+      var status = $('#id_dealing_person_status :selected').text();
+      // alert(status)
+
+      if (status =='Yes') {
+        $("#vanish").show();
+        $("#div_id_name_of_dealing_person").show();
+        $("#div_id_email_of_dealing_person").show();
+        $("#div_id_phone_number_of_dealing_person").show();
+        $("#div_id_relationship").show();
+      }
+      // var val = $("u#id_support").val();
+      // if (val == 'amc') {
+      // $("#div_id_name_of_dealing_person").show();
+      // $("#div_id_email_of_dealing_person").show();
+      // $("#div_id_phone_number_of_dealing_person").show();
+      // $("#div_id_relationship").show();
+
+      // } else if (val == 'warranty') {
+      //     $("#id_warranty_date").show();
+      //     $("#id_warranty_product_list").show();
+      // } else {
+      //     hideInputs();
+      // }
     });
-  </script>
+
+    $("#dealing_person").on('click', function() {
+      // var val = $("u#id_support").val();
+      // if (val == 'amc') {
+      $("#div_id_name_of_dealing_person").show();
+      $("#div_id_email_of_dealing_person").show();
+      $("#div_id_phone_number_of_dealing_person").show();
+      $("#div_id_relationship").show();
+      // } else if (val == 'warranty') {
+      // $("#id_warranty_date").show();
+      //     $("#id_warranty_product_list").show();
+      // } else {
+      //     hideInputs();
+      // }
+    });
+
+    hideInputs();
+  });
+</script>
 <div class="row mb-2">
   <div class="col-sm-6">
-    <h1 class="m-0 text-dark">Person</h1>
+    <h1 class="m-0 text-dark">Lessor</h1>
   </div>
 </div>
-<button id='dealing_person'type="submit" value='add' class="btn btn-primary">Add Dealing Person</button>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
+<!-- <button id='dealing_person' type="submit" value='add' class="btn btn-primary">Add Dealing Person</button> -->
+<form method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}
 
-    <button type="submit" value='save' class="btn btn-primary">Add Person</button>
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Lesser Details</h3>
 
-  </form>
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_name" class="form-group"> <label for="id_name" class=" requiredField">
+              Name<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="name" maxlength="100" class="textinput textInput form-control" required="" id="id_name"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_phone" class="form-group"> <label for="id_phone" class=" requiredField">
+              Phone<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="phone" maxlength="20" class="textinput textInput form-control" required="" id="id_phone"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_email" class="form-group"> <label for="id_email" class=" requiredField">
+              Email<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="email" maxlength="40" class="textinput textInput form-control" required="" id="id_email"> </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_division" class="form-group"> <label for="id_division" class=" requiredField">
+              Division<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="division" maxlength="40" class="textinput textInput form-control" required="" id="id_division"> </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="div_id_district" class="form-group"> <label for="id_district" class=" requiredField">
+              District<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="district" maxlength="40" class="textinput textInput form-control" required="" id="id_district"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_thana" class="form-group"> <label for="id_thana" class=" requiredField">
+              Thana<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="thana" maxlength="40" class="textinput textInput form-control" required="" id="id_thana"> </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_postcode" class="form-group"> <label for="id_postcode" class=" requiredField">
+              Postcode<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="postcode" maxlength="40" class="textinput textInput form-control" required="" id="id_postcode"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_village" class="form-group"> <label for="id_village" class=" requiredField">
+              Village<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="village" maxlength="40" class="textinput textInput form-control" required="" id="id_village"> </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_person_type" class="form-group"> <label for="id_person_type" class=" requiredField">
+              Person type<span class="asteriskField">*</span> </label>
+            <div class=""> <select name="person_type" class="select form-control" required="" id="id_person_type">
+                <option value="" selected="">---------</option>
+                <option value="Organization">Organization</option>
+                <option value="Individual">Individual</option>
+                <option value="Others">Others</option>
+
+              </select> </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_nid" class="form-group"> <label for="id_nid" class="">
+              NID
+            </label>
+            <div class=""> <input type="text" name="nid" maxlength="20" class="textinput textInput form-control" id="id_nid"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_tin" class="form-group"> <label for="id_tin" class=" requiredField">
+              TIN<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="tin" maxlength="20" class="textinput textInput form-control" required="" id="id_tin"> </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_hasbankinfo" class="form-group"> <label for="id_hasbankinfo" class=" requiredField">
+              Hasbankinfo<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="hasbankinfo" maxlength="50" class="textinput textInput form-control" required="" id="id_hasbankinfo"> </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="div_id_sis_supplier_code" class="form-group"> <label for="id_sis_supplier_code" class="">
+              Sis supplier code
+            </label>
+            <div class=""> <input type="text" name="sis_supplier_code" value="RNT" maxlength="50" class="textinput textInput form-control" id="id_sis_supplier_code"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="div_id_dealing_person_status" class="form-group"> <label for="id_dealing_person_status" class=" requiredField">
+              Is there any dealing person other than lessor?<span class="asteriskField">*</span> </label>
+            <div class=""> <select name="dealing_person_status" class="select form-control" required="" id="id_dealing_person_status">
+                <option value="" selected="">---------</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+
+              </select> </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+
+
+
+    <!-- /.col -->
+
+    <!-- /.col -->
+    <!-- </div> -->
+    <!-- /.row -->
+
+
+
+  </div>
+
+  <div class="card card-default" id="vanish">
+    <div class="card-header">
+      <h3 class="card-title">Dealing Person Details</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div id="div_id_name_of_dealing_person" class="form-group" style=""> <label for="id_name_of_dealing_person" class="">
+              Name of dealing person
+            </label>
+            <div class=""> <input type="text" name="name_of_dealing_person" maxlength="50" class="textinput textInput form-control" id="id_name_of_dealing_person"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3">
+          <div id="div_id_email_of_dealing_person" class="form-group" style=""> <label for="id_email_of_dealing_person" class="">
+              Email of dealing person
+            </label>
+            <div class=""> <input type="email" name="email_of_dealing_person" maxlength="30" class="emailinput form-control" id="id_email_of_dealing_person"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-3">
+          <div id="div_id_phone_number_of_dealing_person" class="form-group" style=""> <label for="id_phone_number_of_dealing_person" class="">
+              Phone number of dealing person
+            </label>
+            <div class=""> <input type="text" name="phone_number_of_dealing_person" maxlength="50" class="textinput textInput form-control" id="id_phone_number_of_dealing_person"> </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-3">
+          <div id="div_id_relationship" class="form-group" style=""> <label for="id_relationship" class="">
+              Relationship
+            </label>
+            <div class=""> <input type="text" name="relationship" maxlength="30" class="textinput textInput form-control" id="id_relationship"> </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  <button type="submit" value='save' class="btn btn-primary">Save</button>
+  <a href="javascript:history.go(-1)" value='cancel' class="btn btn-primary">Cancel</a>
+
+</form>
 
 
 {% endblock %}

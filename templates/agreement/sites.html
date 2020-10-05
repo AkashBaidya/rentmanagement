@@ -16,6 +16,197 @@
 <form method="POST">
   {% csrf_token %}
   {{ form|crispy }}
-  <button type="submit" value='save' class="btn btn-primary">Add Site</button>
+
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Site Details</h3>
+
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div id="div_id_site_code" class="form-group"> <label for="id_site_code" class=" requiredField">
+              Site code<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="site_code" maxlength="30" class="textinput textInput form-control" required="" id="id_site_code"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3">
+          <div id="div_id_site_extension" class="form-group"> <label for="id_site_extension" class="">
+              Site extension
+            </label>
+            <div class=""> <input type="text" name="site_extension" maxlength="20" class="textinput textInput form-control" id="id_site_extension"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-3">
+          <div id="div_id_area" class="form-group"> <label for="id_area" class=" requiredField">
+              Area<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="area" maxlength="20" class="textinput textInput form-control" required="" id="id_area"> </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-3">
+          <div id="div_id_district" class="form-group"> <label for="id_district" class=" requiredField">
+              District<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="district" maxlength="20" class="textinput textInput form-control" required="" id="id_district"> </div>
+          </div>
+          <!-- /.col -->
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_site_type" class="form-group"> <label for="id_site_type" class=" requiredField">
+              Site type<span class="asteriskField">*</span> </label>
+            <div class=""> <select name="site_type" class="select form-control" required="" id="id_site_type">
+                <option value="" selected="">---------</option>
+                <option value="SHOP">SHOP</option>
+                <option value="WAREHOUSE">WAREHOUSE</option>
+                <option value="SERVICE CENTER">SERVICE CENTER</option>
+                <option value="RESIDENT">RESIDENT</option>
+                <option value="STORE">STORE</option>
+                <option value="OFFICE">OFFICE</option>
+
+              </select> </div>
+          </div>
+        </div>
+
+
+
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div id="div_id_site_size" class="form-group"> <label for="id_site_size" class=" requiredField">
+              Site size<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="number" name="site_size" class="numberinput form-control" required="" id="id_site_size"> <small id="hint_id_site_size" class="form-text text-muted">size of the site in sft</small> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Storage</h3>
+
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+
+          <div id="div_id_display_area" class="form-group"> <label for="id_display_area" class="">
+              Display area
+            </label>
+            <div class=""> <input type="number" name="display_area" class="numberinput form-control" id="id_display_area"> <small id="hint_id_display_area" class="form-text text-muted">size of the site in sft</small> </div>
+          </div>
+
+
+        </div>
+
+        <div class="col-md-4">
+
+          <div id="div_id_storage_area_inside" class="form-group"> <label for="id_storage_area_inside" class="">
+              Storage area inside
+            </label>
+            <div class=""> <input type="number" name="storage_area_inside" class="numberinput form-control" id="id_storage_area_inside"> <small id="hint_id_storage_area_inside" class="form-text text-muted">size of the site in sft</small> </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+
+          <div id="div_id_storage_area_outside" class="form-group"> <label for="id_storage_area_outside" class="">
+              Storage area outside
+            </label>
+            <div class=""> <input type="number" name="storage_area_outside" class="numberinput form-control" id="id_storage_area_outside"> <small id="hint_id_storage_area_outside" class="form-text text-muted">size of the site in sft</small> </div>
+          </div>
+
+        </div>
+
+
+        <!-- /.col -->
+
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card-body -->
+
+
+
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">GPS Location</h3>
+
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+
+          <div id="div_id_lattitude" class="form-group"> <label for="id_lattitude" class="">
+              Lattitude
+            </label>
+            <div class=""> <input type="number" name="lattitude" step="0.0001" class="numberinput form-control" id="id_lattitude"> </div>
+          </div>
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div id="div_id_longitude" class="form-group"> <label for="id_longitude" class="">
+              Longitude
+            </label>
+            <div class=""> <input type="number" name="longitude" step="0.0001" class="numberinput form-control" id="id_longitude"> </div>
+          </div>
+          <!-- /.form-group -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.card-body -->
+  </div>
+
+
+
+
+
+  <button type="submit" value='save' class="btn btn-primary">Save</button>
+  <a href="javascript:history.go(-1)" value='cancel' class="btn btn-primary">Cancel</a>
 </form>
 {% endblock %}

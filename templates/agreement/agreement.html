@@ -3,16 +3,286 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
+<!-- jQuery -->
+
+
+
+
+
+
+
+
 <div class="row mb-2">
   <div class="col-sm-6">
     <h1 class="m-0 text-dark">Agreement</h1>
   </div>
 </div>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" value='save' name="_save" class="btn btn-primary">Save Agreement</button>
-    <button type="submit" value='next' name="_next" class="btn btn-primary">Next</button>
-    <a href="javascript:history.go(-1)" value='cancel' class="btn btn-primary">Cancel</a>
-  </form>
+<form method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Agreement Details</h3>
+
+      <!-- <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div> -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div id="div_id_agreement_date" class="form-group"> <label for="id_agreement_date" class=" requiredField">
+              Agreement date<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="date" name="agreement_date" class="textinput textInput form-control" required="" id="id_agreement_date"> </div>
+          </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3">
+          <div id="div_id_effected_date_as_actual" class="form-group"> <label for="id_effected_date_as_actual" class=" requiredField">
+              Effected date as actual<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="date" name="effected_date_as_actual" class="textinput textInput form-control" required="" id="id_effected_date_as_actual"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-3">
+          <div id="div_id_total_months" class="form-group"> <label for="id_total_months" class=" requiredField">
+              Total months<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="number" name="total_months" value="1" class="numberinput form-control" required="" id="id_total_months"> </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-3">
+          <div id="div_id_effected_date_as_per_agreement" class="form-group"> <label for="id_effected_date_as_per_agreement" class=" requiredField">
+              Effected date as per agreement<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="date" name="effected_date_as_per_agreement" class="textinput textInput form-control" required="" id="id_effected_date_as_per_agreement"> </div>
+          </div>
+          <!-- /.col -->
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_termination_clause" class="form-group"> <label for="id_termination_clause" class=" requiredField">
+              Termination clause<span class="asteriskField">*</span> </label>
+            <div class=""> <select name="termination_clause" class="select form-control" required="" id="id_termination_clause">
+                <option value="" selected="">---------</option>
+                <option value="Both parties agree to uninterrupted tenancy period">Both parties agree to uninterrupted tenancy period</option>
+                <option value="Both parties negotiator">Both parties negotiator</option>
+                <option value="Both parties  1 month  prior written notice">Both parties 1 month prior written notice</option>
+                <option value="Both parties  2 month  prior written notice">Both parties 2 month prior written notice</option>
+                <option value="Both parties  3 month  prior written notice">Both parties 3 month prior written notice</option>
+                <option value="Both parties  4 month prior written notice">Both parties 4 month prior written notice</option>
+                <option value="Both parties  6 month prior written notice">Both parties 6 month prior written notice</option>
+                <option value="Lessee  only 1 month prior written notice">Lessee only 1 month prior written notice</option>
+                <option value="Lessee  only 3 month prior written notice">Lessee only 3 month prior written notice</option>
+                <option value="Lessee  only 4 month prior written notice">Lessee only 4 month prior written notice</option>
+                <option value="Lessee  only 6 month prior written notice">Lessee only 6 month prior written notice</option>
+                <option value="Possesion Purchase">Possesion Purchase</option>
+
+              </select> </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div id="div_id_agreement_cat_type" class="form-group"> <label for="id_agreement_cat_type" class=" requiredField">
+              Agreement category type<span class="asteriskField">*</span> </label>
+            <div class=""> <select name="agreement_cat_type" class="select form-control" required="" id="id_agreement_cat_type">
+                <option value="" selected="">---------</option>
+                <option value="Relocation">Relocation</option>
+                <option value="New">New</option>
+                <option value="Renewal">Renewal</option>
+                <option value="Extension">Extension</option>
+
+              </select> </div>
+          </div>
+        </div>
+
+
+
+        <!-- /.col -->
+
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+
+
+      </div>
+
+
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div id="div_id_agrement_security_amount" class="form-group"> <label for="id_agrement_security_amount" class=" requiredField">
+              Security Deposit(BDT)<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="number" name="agrement_security_amount" step="0.0001" class="numberinput form-control" required="" id="id_agrement_security_amount"> </div>
+          </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3">
+          <div id="div_id_agrement_advance_amount" class="form-group"> <label for="id_agrement_advance_amount" class=" requiredField">
+              Advance/Prepaid(BDT)<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="number" name="agrement_advance_amount" step="0.0001" class="numberinput form-control" required="" id="id_agrement_advance_amount"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-3">
+          <div id="div_id_notice_date" class="form-group"> <label for="id_notice_date" class=" requiredField">
+              Notice date<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="date" name="notice_date" class="textinput textInput form-control" required="" id="id_notice_date"> </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-md-3">
+          <div id="div_id_notice_period" class="form-group"> <label for="id_notice_period" class=" requiredField">
+              Notice period<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="notice_period" maxlength="2" class="textinput textInput form-control" required="" id="id_notice_period"> </div>
+          </div>
+          <!-- /.col -->
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_file_no" class="form-group"> <label for="id_file_no" class=" requiredField">
+              File no<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="file_no" maxlength="7" class="textinput textInput form-control" required="" id="id_file_no"> </div>
+          </div>
+        </div>
+
+
+
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_serial_no" class="form-group"> <label for="id_serial_no" class=" requiredField">
+              Serial no<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="text" name="serial_no" maxlength="8" class="textinput textInput form-control" required="" id="id_serial_no"> </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div id="div_id_interest_rate" class="form-group"> <label for="id_interest_rate" class=" requiredField">
+              Interest rate<span class="asteriskField">*</span> </label>
+            <div class=""> <input type="number" name="interest_rate" step="0.0001" class="numberinput form-control" required="" id="id_interest_rate"> </div>
+          </div>
+        </div>
+
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+  <div class="card card-default">
+    <div class="card-header">
+      <h3 class="card-title">Employee Details</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div id="div_id_employee_id" class="form-group"> <label for="id_employee_id" class="">
+              Employee id
+            </label>
+            <div class=""> <input type="text" name="employee_id" maxlength="10" class="textinput textInput form-control" id="id_employee_id"> </div>
+          </div>
+
+
+
+
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-4">
+          <div id="div_id_employee_name" class="form-group"> <label for="id_employee_name" class="">
+              Employee name
+            </label>
+            <div class=""> <input type="text" name="employee_name" maxlength="30" class="textinput textInput form-control" id="id_employee_name"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+        <div class="col-md-4">
+          <div id="div_id_employee_email" class="form-group"> <label for="id_employee_email" class="">
+              Employee email
+            </label>
+            <div class=""> <input type="email" name="employee_email" maxlength="30" class="emailinput form-control" id="id_employee_email"> </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="div_id_employee_phone_number" class="form-group"> <label for="id_employee_phone_number" class="">
+              Employee phone number
+            </label>
+            <div class=""> <input type="text" name="employee_phone_number" maxlength="15" class="textinput textInput form-control" id="id_employee_phone_number"> </div>
+          </div>
+        </div>
+
+
+
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div id="div_id_employee_designation" class="form-group"> <label for="id_employee_designation" class="">
+              Employee designation
+            </label>
+            <div class=""> <input type="text" name="employee_designation" maxlength="50" class="textinput textInput form-control" id="id_employee_designation"> </div>
+          </div>
+        </div>
+        <!-- /.col -->
+        <!-- </div> -->
+        <!-- /.row -->
+
+
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <button type="submit" value='save' name="_save" class="btn btn-primary">Save Agreement</button>
+  <button type="submit" value='next' name="_next" class="btn btn-primary">Next</button>
+  <a href="javascript:history.go(-1)" value='cancel' class="btn btn-primary">Cancel</a>
+</form>
+
+
+
+
 {% endblock %}

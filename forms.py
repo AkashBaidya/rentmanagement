@@ -20,4 +20,4 @@ class PropertyForm(forms.ModelForm):
 class AgreementForm(forms.ModelForm):
     class Meta:
         model = Agreement
-        fields = ['agrm_create_date', 'tenure_year','tenure_month','eff_date','exp_date','notice_date','notice_period','file','file_no','contact_person']
+        fields = ['agrm__date', 'tenure_year','tenure_month','eff_date','exp_date','notice_date','notice_period','file','file_no','contact_person']

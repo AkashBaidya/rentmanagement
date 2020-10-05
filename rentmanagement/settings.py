@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'agreement',
     'crispy_forms',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 
+# 
+# LOGIN_REDIRECT_URL='/dashboard/'
 
-LOGIN_REDIRECT_URL='/dashboard/'
+LOGIN_URL= "/login/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+# BOOTSTRAP4 = {
+#     'include_jquery': True,
+# }

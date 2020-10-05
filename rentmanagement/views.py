@@ -22,6 +22,7 @@ from agreement.models import AdvancePaymentline
 from agreement.models import Site
 from agreement.models import Person
 from agreement.models import Properties
+from agreement.models import LocalArea
 from django.shortcuts import get_object_or_404
 
 from django.core import validators
@@ -30,18 +31,33 @@ from django.db.models import Sum
 
 import numpy as np
 
+from django.http import JsonResponse
+
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
+
+
+
 
 # Create your views here.
+@csrf_protect
+@login_required
 def dashboard_view(request):
     return render(request, 'agreement/dashboard.html')
 def error_view(request):
     return render(request, 'agreement/error.html')
+
+
+@login_required
 def sites_input_view(request):
     form = SiteForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect(sites_view)
     return render(request, 'agreement/sites.html', {'form': form})
+
+@login_required
 def sites_edit_view(request,id):
     obj=get_object_or_404(Site,id=id)
     form = SiteForm(request.POST or None,instance=obj)
@@ -55,7 +71,7 @@ def sites_edit_view(request,id):
 
 
 
-
+@login_required
 def rent_delete_view(request,id):
     # obj=get_object_or_404(Rentline,id=id)
     rent= Rentline.objects.filter(id=id)
@@ -67,6 +83,8 @@ def rent_delete_view(request,id):
     # else:
     #     messages.success(request,"Please try again")
     return render(request, 'agreement/delete_rent.html',context={'rent':rent})
+
+@login_required
 def rent_delete_view_new(request,id):
     # obj=get_object_or_404(Rentline,id=id)
     rent= Rentline.objects.filter(id=id)
@@ -82,7 +100,7 @@ def rent_delete_view_new(request,id):
     #     messages.success(request,"Please try again")
     return render(request, 'agreement/delete_rent.html',context={'rent':rent})
 
-
+@login_required
 def advance_delete_view(request,id):
     # obj=get_object_or_404(Rentline,id=id)
     rent= AdvancePaymentline.objects.filter(id=id)
@@ -94,6 +112,9 @@ def advance_delete_view(request,id):
     # else:
     #     messages.success(request,"Please try again")
     return render(request, 'agreement/delete_advance.html',context={'rent':rent})
+
+
+@login_required
 def advance_delete_view_new(request,id):
     # obj=get_object_or_404(Rentline,id=id)
     rent= AdvancePaymentline.objects.filter(id=id)
@@ -108,7 +129,7 @@ def advance_delete_view_new(request,id):
     # else:
     #     messages.success(request,"Please try again")
     return render(request, 'agreement/delete_advance.html',context={'rent':rent})
-
+@login_required
 def person_edit_view(request,id):
     obj=get_object_or_404(Person,id=id)
     form = PersonForm(request.POST or None,instance=obj)
@@ -119,6 +140,8 @@ def person_edit_view(request,id):
         messages.success(request,"Please try again")
     return render(request, 'agreement/person_update.html', {'form': form})
 
+
+@login_required
 def agreement_edit_view(request,id):
     obj=get_object_or_404(Agreement,id=id)
     form = AgreementForm(request.POST or None,instance=obj)
@@ -128,12 +151,18 @@ def agreement_edit_view(request,id):
     else:
         messages.success(request,"Please try again")
     return render(request, 'agreement/agreement.html', {'form': form})
+
+
+@login_required
 def person_input_view(request):
     form = PersonForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect(person_view)
     return render(request, 'agreement/person.html', {'form': form})
+
+
+@login_required
 
 def property_input_view(request):
     form = PropertyForm(request.POST or None)
@@ -202,6 +231,9 @@ def property_input_view(request):
             return render(request,'agreement/error.html', {'msg': 'Property Size and Site size does not match.'})
 
     return render(request, 'agreement/property.html', {'form': form})
+
+
+@login_required
 def rent_input_view(request):
     form = RentlineForm(request.POST or None)
     if form.is_valid():
@@ -211,6 +243,9 @@ def rent_input_view(request):
         return redirect(agreement_detail_view,pk=e.id)
     return render(request, 'agreement/rent.html', {'form': form})
 
+
+
+@login_required
 def rent_input_view_new(request,id):
     form = RentlineForm(request.POST or None)
     not_permitted=1
@@ -275,7 +310,7 @@ def rent_input_view_new(request,id):
 
 
 
-
+@login_required
 def adv_input_view_new(request,id):
     form = AdvancePaymentlineForm(request.POST or None)
 
@@ -343,12 +378,15 @@ def adv_input_view_new(request,id):
 
 
 
-
+@login_required
 def security_input_view(request):
     form = SecuritylineForm(request.POST or None)
     if form.is_valid():
         form.save()
     return render(request, 'agreement/Security.html', {'form': form})
+
+
+@login_required
 def advance_input_view(request):
     form = AdvancePaymentlineForm(request.POST or None)
     if form.is_valid():
@@ -363,6 +401,8 @@ def advance_input_view(request):
 def success(request):
     return HttpResponse("File successfully uploaded")
 
+
+@login_required
 def agreement_input_view(request):
     form = AgreementForm(request.POST or None)
 
@@ -376,16 +416,21 @@ def agreement_input_view(request):
         return redirect(agreement_view)
 
     return render(request, 'agreement/agreement.html', {'form': form})
+
+@login_required
 def sites_view(request):
     all_sites = Site.objects.all()
     return render(request, 'agreement/sites_result.html', {'all_sites': all_sites})
+
+
+@login_required
 def rent_detail_view(request):
 
     rent= Agreement.objects.all().select_related('rentline').values()
     # rent= Rentline.objects.all().select_related('agreement_ref').values()
     return render(request, 'agreement/rent_detail.html', context={'rent': rent})
 
-
+@login_required
 def rent_detail_view(request,ag):
 
     e = Agreement.objects.get(id=ag)
@@ -405,6 +450,9 @@ def rent_detail_view(request,ag):
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
     return render(request, 'agreement/rent_detail.html', context={'rent': rent})
+
+
+@login_required
 def security_detail_view(request,ag):
     # agreement = get_object_or_404(Agreement,id=pk)
     e = Agreement.objects.get(id=ag)
@@ -412,6 +460,8 @@ def security_detail_view(request,ag):
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
     return render(request, 'agreement/security_detail.html', context={'rent': rent})
+
+@login_required
 def advance_detail_view(request,ag):
     # agreement = get_object_or_404(Agreement,id=pk)
     e = Agreement.objects.get(id=ag)
@@ -419,10 +469,12 @@ def advance_detail_view(request,ag):
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
     return render(request, 'agreement/advance_detail.html', context={'rent': rent})
-
+@login_required
 def agreement_view(request):
     all_agreement = Agreement.objects.all()
     return render(request, 'agreement/agreement_result.html', {'all_agreement': all_agreement})
+
+@login_required
 def agreement_detail_view(request,pk):
 
     rent_rou=total_rou_calculation(pk)
@@ -439,6 +491,8 @@ def agreement_detail_view(request,pk):
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
     return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou})
+
+@login_required
 def agreement_detail_view_agrm(request,pk):
     # agreement = get_object_or_404(Agreement,id=pk)
     agreement=Agreement.objects.prefetch_related('rentline').get(agrm_id=pk)
@@ -454,11 +508,11 @@ def agreement_detail_view_agrm(request,pk):
     # agreement=agreement.rent
     return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance})
 
-
+@login_required
 def properties_view(request):
     all_properties = Properties.objects.all()
     return render(request, 'agreement/property_results.html', {'all_properties': all_properties})
-
+@login_required
 def person_view(request):
     all_person = Person.objects.all()
     return render(request, 'agreement/person_result.html', {'all_person': all_person})
@@ -518,3 +572,76 @@ def total_rou_calculation(pk):
     print(total_rou)
 
     return total_rou
+
+
+def autocomplete_div_view(request):
+    print("hello")
+    if 'term' in request.GET:
+        search_qs = LocalArea.objects.filter(division__startswith=request.GET.get('term'))
+        print(search_qs)
+        division_list=list()
+        # print q
+        for d in search_qs:
+            division_list.append(d.division)
+
+
+        print(division_list)
+
+
+        return JsonResponse(division_list,safe=False)
+    else:
+        return JsonResponse([1, 2, 3, 4], safe=False)
+    # return render(request, 'agreement/property_results.html', {'all_properties': all_properties})
+    # return JsonResponse(division,safe=False)
+def autocomplete_postcode_view(request):
+    print("hello")
+    if 'term' in request:
+
+        search_qs = LocalArea.objects.filter(postcode__startswith=request.GET.get('term'))
+        division=list()
+        # print q
+        for d in search_qs:
+            division.append(d.division)
+
+
+        print(division)
+
+
+        return JsonResponse(division,safe=False)
+
+    return render(request, 'agreement/property_results.html', {'all_properties': all_properties})
+
+@csrf_exempt
+def update_agreement_status_view(request, id):
+    # csrfContext = RequestContext(request)
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+
+    print(type(id))
+    print(id)
+
+    # id=int(id)
+    #
+    # fetch the object related to passed id
+    obj = get_object_or_404(Agreement, id = id)
+
+    obj.status='activated'
+    obj.save()
+    print(obj.status)
+
+    return JsonResponse([1, 2, 3, 4], safe=False)
+
+    # pass the object as instance in form
+    # form = GeeksForm(request.POST or None, instance = obj)
+    #
+    # # save the data from the form and
+    # # redirect to detail_view
+    # if form.is_valid():
+    #     form.save()
+    #     return HttpResponseRedirect("/"+id)
+    #
+    # # add form dictionary to context
+    # context["form"] = form
+    #
+    # return render(request, "update_view.html", context)
