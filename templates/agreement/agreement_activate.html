@@ -96,13 +96,12 @@
 
               <!-- <a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Activate</a> -->
 
-              {% if 'submitted' in agreement.status %}
+              {% if 'activated' in agreement.status %}
               <!-- <a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">B</a> -->
-              {% elif 'activated' in agreement.status %}
-              
+
               {% else %}
 
-                <a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Submit</a>
+                <a id="activate_button" style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Activate</a>
               {% endif %}
               <!-- <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
@@ -162,7 +161,7 @@
     var table = $('#example2  td:last').hide();
     $('#total_tag').show();
     $('#status').show();
-    request_url = '/update_agr_status/' + {{agreement.id}} + '/';
+    request_url = '/update_agr_status_new/' + {{agreement.id}} + '/';
     $.ajax({
       url: request_url, // the endpoint
       type: "POST", // http method

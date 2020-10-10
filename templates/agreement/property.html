@@ -57,12 +57,12 @@
       // alert(status)
       // alert(typeof(status))
 
-      if (status === '1') {
+      if (status == 1) {
         // $("#vanish").show();
         $("#div_id_owner1").show();
         $("#div_id_percentage_of_first_owner").show();
 
-      } else if (status === "2") {
+      } else if (status == 2) {
 
         // $("#vanish").show();
         // alert("changed")
@@ -73,7 +73,7 @@
 
 
 
-      } else if (status === '3') {
+      } else if (status == 3) {
 
         // $("#vanish").show();
         $("#div_id_owner1").show();
@@ -85,7 +85,7 @@
 
 
 
-      } else if (status === '4') {
+      } else if (status == 4) {
 
         // $("#vanish").show();
         $("#div_id_owner1").show();
@@ -98,7 +98,7 @@
         $("#div_id_percentage_of_fourth_owner").show();
 
 
-      } else if (status === '5') {
+      } else if (status == 5) {
 
         // $("#vanish").show();
         $("#div_id_owner1").show();
@@ -136,12 +136,12 @@
       // alert(status)
       // alert(typeof(status))
 
-      if (status === '1') {
+      if (status == 1) {
         // $("#vanish").show();
         $("#div_id_site1").show();
         $("#div_id_percentage_of_first_site").show();
 
-      } else if (status === "2") {
+      } else if (status == 2) {
 
         // $("#vanish").show();
         // alert("changed")
@@ -152,7 +152,7 @@
 
 
 
-      } else if (status === '3') {
+      } else if (status == 3) {
 
         // $("#vanish").show();
         $("#div_id_site1").show();
@@ -164,7 +164,7 @@
 
 
 
-      } else if (status === '4') {
+      } else if (status == 4) {
 
         // $("#vanish").show();
         $("#div_id_site1").show();
@@ -230,6 +230,8 @@
 </div>
 <form method="POST">
   {% csrf_token %}
+  {{ form|crispy }}
+
   <div class="card card-default">
     <div class="card-header">
       <h3 class="card-title">Property Details</h3>
@@ -343,8 +345,7 @@
     </div>
 
   </div>
-  
-  {{ form|crispy }}
+
 
 
   <button type="submit" value='save' class="btn btn-primary">Add Property</button>

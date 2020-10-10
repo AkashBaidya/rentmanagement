@@ -29,7 +29,11 @@ admin.site.register(Rentline)
 class LocalAreaAdmin(ImportExportModelAdmin):
     pass
 # admin.site.register(LocalArea)
-admin.site.register(SingerArea)
+
+@admin.register(SingerArea)
+class SingerAreaAdmin(ImportExportModelAdmin):
+    pass
+# admin.site.register(SingerArea)
 # admin.site.register(Security)
 admin.site.register(Securityline)
 # admin.site.register(AdvancePayment)

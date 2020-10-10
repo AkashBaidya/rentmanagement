@@ -39,6 +39,7 @@ from rentmanagement.views import properties_view
 from rentmanagement.views import person_view
 from rentmanagement.views import error_view
 from rentmanagement.views import agreement_detail_view
+from rentmanagement.views import agreement_detail_view_activate
 
 from rentmanagement.views import rent_input_view
 from rentmanagement.views import rent_input_view_new
@@ -57,7 +58,10 @@ from rentmanagement.views import person_edit_view
 from rentmanagement.views import agreement_detail_view_agrm
 from rentmanagement.views import agreement_edit_view
 
+from rentmanagement.views import agreement_activated_view
+
 from rentmanagement.views import update_agreement_status_view
+from rentmanagement.views import update_agreement_status_new_view
 
 from rentmanagement.views import autocomplete_div_view
 from rentmanagement.views import autocomplete_postcode_view
@@ -78,6 +82,7 @@ urlpatterns = [
     url(r'^advance_delete_view_new/?(?P<id>[^/]+)/$', advance_delete_view_new, name="advance_delete_view_new"),
     path('sites/',sites_view,name='sites_view'),
     path('update_agr_status/<id>/',update_agreement_status_view,name='update_agreement_status_view'),
+    path('update_agr_status_new/<id>/',update_agreement_status_new_view,name='update_agreement_status_new_view'),
     path('person_input/',person_input_view,name='person_input_view'),
     path('person/',person_view,name='person_view'),
     path('error/',error_view,name='error_view'),
@@ -87,7 +92,9 @@ urlpatterns = [
     url(r'^agreement_edit/?(?P<id>[^/]+)/$', agreement_edit_view, name="agreement_edit_view"),
     # path('agreement_edit/',agreement_edit_view,name='agreement_edit_view'),
     path('agreement_result/',agreement_view,name='agreement_view'),
+    path('agreement_final_result/',agreement_activated_view,name='agreement_activated_view'),
     url(r'^agreement/?(?P<pk>[^/]+)/$', agreement_detail_view, name="agreement_detail_view"),
+    url(r'^agreement_detail_activate/?(?P<pk>[^/]+)/$', agreement_detail_view_activate, name="agreement_detail_view_activate"),
     url(r'^agreement_rent/(?P<pk>\d+)/$', agreement_detail_view_agrm, name="agreement_detail_view_agrm"),
     url(r'^rents/?(?P<ag>[^/]+)/$', rent_detail_view, name="rent_detail_view"),
     url(r'^rent_input_view_new/?(?P<id>[^/]+)/$', rent_input_view_new, name="rent_input_view_new"),

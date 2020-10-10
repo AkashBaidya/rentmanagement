@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'import_export',
+    # 'user_tags'
 ]
 
 MIDDLEWARE = [

@@ -10,6 +10,8 @@
 
   {% load static %}
 
+
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{% static 'agreement/plugins/fontawesome-free/css/all.min.css'%}">
   <!-- IonIcons -->
@@ -45,7 +47,7 @@ to get the desired effect
         <a href="{%url 'sites_view'%}" class="nav-link">Sites</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="{%url 'person_view'%}" class="nav-link">Person</a>
+        <a href="{%url 'person_view'%}" class="nav-link">Lessor</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{%url 'properties_view' %}" class="nav-link">Property</a>
@@ -248,7 +250,7 @@ to get the desired effect
             <a href="{%url 'person_view'%} " class="nav-link">
               <i class="nav-icon fas fa-male"></i>
               <p>
-                Person
+                Lessor
                 <span class="right badge badge-danger"></span>
               </p>
             </a>
@@ -281,6 +283,47 @@ to get the desired effect
               </p>
             </a>
           </li>
+          {% if user.username == 'admin' %}
+          <li class="nav-item">
+            <a href="{%url 'agreement_activated_view'%} " class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                List of Submitted agreements
+                <span class="right badge badge-danger"></span>
+              </p>
+            </a>
+          </li>
+          {% else %}
+          <!-- <li class="nav-item">
+            <a href="{%url 'agreement_activated_view'%} " class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+
+                <span class="right badge badge-danger"></span>
+              </p>
+            </a>
+          </li> -->
+
+
+          {% endif %}
+
+          <!-- {% for group in user.groups.all %} -->
+          <!-- {% if perms.agreement.add_agreement %} -->
+
+
+          <!-- {% else %}
+          <li class="nav-item">
+            <a href="{%url 'agreement_activated_view'%} " class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
+              <p>
+                Activated list of Report
+                <span class="right badge badge-danger"></span>
+              </p>
+            </a>
+          </li>
+
+          {% endif %} -->
+          <!-- {%endfor%} -->
           <li class="nav-item">
             <a href="{%url 'logout'%} " class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

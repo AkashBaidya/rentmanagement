@@ -22,6 +22,7 @@
   {% csrf_token %}
   {{ form|crispy }}
 
+
   <div class="card card-default">
     <div class="card-header">
       <h3 class="card-title">Agreement Details</h3>
@@ -123,17 +124,17 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-3">
-          <div id="div_id_agrement_security_amount" class="form-group"> <label for="id_agrement_security_amount" class=" requiredField">
+          <div id="div_id_agreement_security_amount" class="form-group"> <label for="id_agreement_security_amount" class=" requiredField">
               Security Deposit(BDT)<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="number" name="agrement_security_amount" step="0.0001" class="numberinput form-control" required="" id="id_agrement_security_amount"> </div>
+            <div class=""> <input type="number" name="agreement_security_amount" step="0.0001" class="numberinput form-control" required="" id="id_agreement_security_amount"> </div>
           </div>
 
         </div>
         <!-- /.col -->
         <div class="col-md-3">
-          <div id="div_id_agrement_advance_amount" class="form-group"> <label for="id_agrement_advance_amount" class=" requiredField">
+          <div id="div_id_agreement_advance_amount" class="form-group"> <label for="id_agreement_advance_amount" class=" requiredField">
               Advance/Prepaid(BDT)<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="number" name="agrement_advance_amount" step="0.0001" class="numberinput form-control" required="" id="id_agrement_advance_amount"> </div>
+            <div class=""> <input type="number" name="agreement_advance_amount" step="0.0001" class="numberinput form-control" required="" id="id_agreement_advance_amount"> </div>
           </div>
         </div>
         <!-- /.col -->
@@ -275,6 +276,7 @@
     </div>
 
   </div>
+
 
 
   <button type="submit" value='save' name="_save" class="btn btn-primary">Save Agreement</button>

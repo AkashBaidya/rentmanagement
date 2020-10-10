@@ -5,46 +5,43 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Lessor Data</h3>
+          <h3 class="card-title">Agreement Data</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
           <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
-            <div class="row">
-              <div class="col-sm-12 col-md-6">
-                <a href="{%url 'person_input_view' %}"  style="margin: 10px" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Add New Lessor</a>
-                <!-- <button click="{%url 'agreement_input_view' %}" style="margin: 10px"type="button" name="button" class="btn btn-primary">Add New Agreement</button> -->
-              </div>
-              <div class="col-sm-12 col-md-6">
-
-
-
-              </div>
-            </div>
+          
             <div class="row">
               <div class="col-sm-12">
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Name</th>
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Email</th>
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Phone</th>
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Type</th>
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Address</th>
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Action</th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Agreement Id</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Effective Date</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Expiry Date</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Contact Person</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Notice Period</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Main Site</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Status</th>
+
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Details Action</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Edit Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {% for person in all_person %}
+                    {% for agreement in all_agreement %}
                     <tr>
-                      <td>{{ person.name }}</td>
-                      <td>{{ person.email }}</td>
-                      <td>{{ person.phone }}</td>
-                      <td>{{ person.type }}</td>
-                      <td>{{ person.address }}</td>
-                      <td><a href="/person_edit_view/{{ person.id }}/" >Edit</a></td>
-                      <!-- <td>{{ agreement.contact_person}}</td>
-                      <td>{{ agreement.notice_period}}</td> -->
+                      <td>{{ agreement.agrm_id }}</td>
+                      <td>{{ agreement.eff_date }}</td>
+                      <td>{{ agreement.exp_date }}</td>
+                      <td>{{ agreement.contact_person}}</td>
+                      <td>{{ agreement.notice_period}}</td>
+                      <td>{{ agreement.main_site}}</td>
+                      <td>{{ agreement.status}}</td>
+                      <td><a href="/agreement_detail_activate/{{ agreement.id }}/" >Details</a></td>
+                      <td><a href="/agreement_edit/{{ agreement.id }}/" >Edit</a></td>
+                      <!-- <td></td> -->
+                      <!-- <td>Edit</td> -->
                     </tr>
                     {% endfor %}
                   </tbody>

@@ -16,6 +16,10 @@ from agreement.forms import RentlineForm
 from agreement.forms import SecuritylineForm
 from agreement.forms import AdvancePaymentlineForm
 
+
+from agreement.forms import SiteEditForm
+from agreement.forms import PersonEditForm
+
 from agreement.models import Agreement
 from agreement.models import Rentline
 from agreement.models import AdvancePaymentline
@@ -38,6 +42,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.csrf import csrf_exempt
 
 
+from django.db.models import Max
+
+
 
 
 # Create your views here.
@@ -53,20 +60,27 @@ def error_view(request):
 def sites_input_view(request):
     form = SiteForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        print(form)
+        # print(request.POST['site_extension'].value())
+        instance=form.save(commit=False)
+        instance.site_extension=check_maximum_extension(request.POST['site_code'])
+        instance.save()
+
         return redirect(sites_view)
+    else:
+        print(form.errors)
     return render(request, 'agreement/sites.html', {'form': form})
 
 @login_required
 def sites_edit_view(request,id):
     obj=get_object_or_404(Site,id=id)
-    form = SiteForm(request.POST or None,instance=obj)
+    form = SiteEditForm(request.POST or None,instance=obj)
     if form.is_valid():
         form.save()
         return redirect(sites_view)
     else:
         messages.success(request,"Please try again")
-    return render(request, 'agreement/sites.html', {'form': form})
+    return render(request, 'agreement/sites_update.html', {'form': form})
 
 
 
@@ -132,7 +146,7 @@ def advance_delete_view_new(request,id):
 @login_required
 def person_edit_view(request,id):
     obj=get_object_or_404(Person,id=id)
-    form = PersonForm(request.POST or None,instance=obj)
+    form = PersonEditForm(request.POST or None,instance=obj)
     if form.is_valid():
         form.save()
         return redirect(person_view)
@@ -155,18 +169,46 @@ def agreement_edit_view(request,id):
 
 @login_required
 def person_input_view(request):
+    # print(PersonForm)
+    #
+    # print(request.POST)
+
     form = PersonForm(request.POST or None)
+
+
+    print(form)
     if form.is_valid():
-        form.save()
+
+        # f=form.save()
+        name=request.POST['name']
+        phone=request.POST['phone']
+        person_type=request.POST['person_type']
+        nid=request.POST['nid']
+        tin=request.POST['tin']
+        email=request.POST['email']
+        dealing_person_status=request.POST['dealing_person_status']
+        division=request.POST['division']
+        district=request.POST['district']
+        thana=request.POST['thana']
+        postcode=request.POST['postcode']
+        village=request.POST['village']
+        sis_supplier_code=request.POST['sis_supplier_code']
+        name_of_dealing_person=request.POST['name_of_dealing_person']
+        email_of_dealing_person=request.POST['email_of_dealing_person']
+        relationship=request.POST['relationship']
+
+        instance=Person(name=name, phone=phone,person_type=person_type,nid=nid, tin=tin, email=email, dealing_person_status=dealing_person_status, division=division, district=district, thana=thana, village=village, postcode=postcode, sis_supplier_code=sis_supplier_code,name_of_dealing_person=name_of_dealing_person,email_of_dealing_person=email_of_dealing_person,relationship=relationship)
+        instance.save()
         return redirect(person_view)
     return render(request, 'agreement/person.html', {'form': form})
 
 
 @login_required
-
 def property_input_view(request):
     form = PropertyForm(request.POST or None)
+    #print(form)
     print(request.POST)
+    #print("first test")
 
     # if form.is_valid():
     #     form.save()
@@ -217,17 +259,59 @@ def property_input_view(request):
 
         not_permitted=1
 
+        print("size shop total"+str(size_shop_total))
+        print("property size"+property_size)
+
         if size_shop_total!=int(property_size):
             not_permitted=0;
-        print(form.is_valid())
+        #print(form.is_valid())
 
 
         if form.is_valid() and not_permitted==1:
-            form.save()
+            post=form.save(commit=False)
+            # instance=form.save(commit=False)
+            post.type=request.POST.get('type')
+            post.desc=request.POST['desc']
+            post.status=request.POST['status']
+            post.property_size=request.POST['property_size']
+
+            post.division=request.POST['division']
+            post.district=request.POST['district']
+            post.thana=request.POST['thana']
+
+            post.postcode=request.POST['postcode']
+            post.village=request.POST['village']
+
+            # instance.number_of_owner=request.POST['number_of_owner']
+            # instance.owner1=request.POST['owner1']
+            # instance.owner2=request.POST['owner2']
+            # instance.owner3=request.POST['owner3']
+            # instance.owner4=request.POST['owner4']
+            # instance.owner5=request.POST['owner5']
+            #
+            post.number_of_sites=request.POST['number_of_sites']
+            # instance.site1=request.POST['site1']
+            # instance.percentage_of_first_site=request.POST['percentage_of_first_site']
+            #
+            # instance.site2=request.POST['site2']
+            # instance.percentage_of_second_site=request.POST['percentage_of_second_site']
+            #
+            # instance.site3=request.POST['site3']
+            # instance.percentage_of_third_site=request.POST['percentage_of_third_site']
+            #
+            # instance.site4=request.POST['site4']
+            # instance.percentage_of_fourth_site=request.POST['percentage_of_fourth_site']
+
+            post.save()
+            print("not error")
+            print(request.POST['postcode'])
+            # print(instance.save())
             return redirect(properties_view)
 
         else:
             # print("else")
+            print(form.errors)
+            print("error")
             return render(request,'agreement/error.html', {'msg': 'Property Size and Site size does not match.'})
 
     return render(request, 'agreement/property.html', {'form': form})
@@ -317,7 +401,7 @@ def adv_input_view_new(request,id):
 
     not_permitted=1
     e = Agreement.objects.get(id=id)
-    total_amount=e.agrement_advance_amount
+    total_amount=e.agreement_advance_amount
     rent=e.advanceline.aggregate(Sum('advance_adjustment_per_month'))
     print(rent)
     for item in rent.values():
@@ -405,15 +489,48 @@ def success(request):
 @login_required
 def agreement_input_view(request):
     form = AgreementForm(request.POST or None)
+    print(request.POST)
 
 
 
     if '_next' in request.POST and form.is_valid():
-        post=form.save()
+        post=form.save(commit=False)
+        post.agreement_date=request.POST['agreement_date']
+        post.effected_date_as_actual=request.POST['effected_date_as_actual']
+        post.effected_date_as_per_agreement=request.POST['effected_date_as_per_agreement']
+        post.agreement_cat_type=request.POST['agreement_cat_type']
+        post.notice_period=request.POST['notice_period']
+        post.file_no=request.POST['file_no']
+        post.serial_no=request.POST['serial_no']
+        post.agreement_advance_amount=request.POST['agreement_advance_amount']
+        post.agreement_security_amount=request.POST['agreement_security_amount']
+        site1=form['main_site'].value()
+        print(site1)
+        post.agrm_id=create_id_for_agreement(post.main_site,post.file_no,post.serial_no)
+        post.save()
         return redirect(agreement_detail_view,pk=post.id)
+    else:
+        print(form.errors)
+
     if '_save' in request.POST and form.is_valid():
-        form.save()
+        post=form.save(commit=False)
+        post=form.save(commit=False)
+        post.agreement_date=request.POST['agreement_date']
+        post.effected_date_as_actual=request.POST['effected_date_as_actual']
+        post.effected_date_as_per_agreement=request.POST['effected_date_as_per_agreement']
+        post.agreement_cat_type=request.POST['agreement_cat_type']
+        post.notice_period=request.POST['notice_period']
+        post.file_no=request.POST['file_no']
+        post.serial_no=request.POST['serial_no']
+        post.agreement_advance_amount=request.POST['agreement_advance_amount']
+        post.agreement_security_amount=request.POST['agreement_security_amount']
+        site1=form['main_site'].value()
+
+        post.agrm_id=create_id_for_agreement(post.main_site,post.file_no,post.serial_no)
+        post.save()
         return redirect(agreement_view)
+    else:
+        print(form.errors)
 
     return render(request, 'agreement/agreement.html', {'form': form})
 
@@ -475,6 +592,11 @@ def agreement_view(request):
     return render(request, 'agreement/agreement_result.html', {'all_agreement': all_agreement})
 
 @login_required
+def agreement_activated_view(request):
+    all_agreement = Agreement.objects.filter(status__iexact='submitted')
+    return render(request, 'agreement/agreement_activate_list.html', {'all_agreement': all_agreement})
+
+@login_required
 def agreement_detail_view(request,pk):
 
     rent_rou=total_rou_calculation(pk)
@@ -485,12 +607,33 @@ def agreement_detail_view(request,pk):
     rent=e.rentline.all()
     security=e.securityline.all()
     advance=e.advanceline.all()
-    print(agreement)
-    print(rent)
-    print(advance)
+    print(e.agreement_advance_amount)
+    # print(agreement)
+    # print(rent)
+    # print(advance)
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
     return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou})
+
+@login_required
+def agreement_detail_view_activate(request,pk):
+
+    rent_rou=total_rou_calculation(pk)
+    # agreement = get_object_or_404(Agreement,id=pk)
+    agreement=Agreement.objects.prefetch_related('rentline').get(id=pk)
+
+    e = Agreement.objects.get(id=pk)
+    rent=e.rentline.all()
+    security=e.securityline.all()
+    advance=e.advanceline.all()
+    print(e.agreement_advance_amount)
+    # print(agreement)
+    # print(rent)
+    # print(advance)
+    # users = User.objects.get(id=pk).prefetch_related('item_set')
+    # agreement=agreement.rent
+    return render(request, 'agreement/agreement_activate.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou})
+
 
 @login_required
 def agreement_detail_view_agrm(request,pk):
@@ -541,6 +684,7 @@ def total_rou_calculation(pk):
     #get agreement related rent objects
 
     e = Agreement.objects.get(id=pk)
+    print(e.id)
     count=e.rentline.all().count()
     b=e.rentline.all()
 
@@ -566,11 +710,14 @@ def total_rou_calculation(pk):
         month=month+i[5]
 
     print(total_pv)
-    print(e.agrement_advance_amount)
-
-    total_rou=total_pv+int(e.agrement_advance_amount)
+    print(e.agreement_advance_amount)
+    # print(e.agreement_advance_amount)
+    #
+    total_rou=total_pv+int(e.agreement_advance_amount)
     print(total_rou)
 
+
+    # return total_pv
     return total_rou
 
 
@@ -626,11 +773,85 @@ def update_agreement_status_view(request, id):
     # fetch the object related to passed id
     obj = get_object_or_404(Agreement, id = id)
 
+    obj.status='submitted'
+    obj.save()
+    print(obj.status)
+
+    return JsonResponse([1, 2, 3, 4], safe=False)
+@csrf_exempt
+def update_agreement_status_new_view(request, id):
+    # csrfContext = RequestContext(request)
+    # dictionary for initial data with
+    # field names as keys
+    context ={}
+
+    print(type(id))
+    print(id)
+
+    # id=int(id)
+    #
+    # fetch the object related to passed id
+    obj = get_object_or_404(Agreement, id = id)
+
     obj.status='activated'
     obj.save()
     print(obj.status)
 
     return JsonResponse([1, 2, 3, 4], safe=False)
+
+def check_maximum_extension(shop_code):
+
+
+    return_value=0
+    try:
+        obj=Site.objects.filter(site_code__contains=shop_code)
+        a=obj.aggregate(Max('site_extension'))
+        return_value=a['site_extension__max']+1
+        print(return_value)
+        return return_value
+
+    except:
+        print(None)
+        return return_value
+        # print("None")
+
+def create_id_for_agreement(shop_code,file_no,serial_no):
+
+
+    return_value=''
+    # print("Check value")
+    # print(type(shop_code).__name__)
+    # site=type(shop_code).__name__
+
+    # site_code=site.value().split('-')[0]
+
+
+    # obj=Site.objects.filter(site_code__exact=site_code)
+    site_name=shop_code.site_code
+    site_extension=shop_code.site_extension
+    site_type=shop_code.site_type
+
+    # print(shop_code.site_type)
+    # site_type=obj.site_type
+    return_value=site_name+str(site_extension)+'-'+site_type+'-'+file_no+'-'+serial_no
+
+    print(return_value)
+    return return_value
+    # try:
+    #     obj=Site.objects.filter(site_code__exact=shop_code)
+    #     site_type=obj.site_type
+    #     return_value=shop_code+'-'+site_type+'-'+file_no+'-'+serial_no
+    #
+    #     print(return_value)
+    #     return return_value
+    #
+    # except:
+    #     print(None)
+    #     return return_value
+
+
+
+
 
     # pass the object as instance in form
     # form = GeeksForm(request.POST or None, instance = obj)
