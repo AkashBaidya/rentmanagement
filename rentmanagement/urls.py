@@ -55,6 +55,7 @@ from rentmanagement.views import security_input_view
 from rentmanagement.views import security_detail_view
 from rentmanagement.views import sites_edit_view
 from rentmanagement.views import person_edit_view
+from rentmanagement.views import property_edit_view
 from rentmanagement.views import agreement_detail_view_agrm
 from rentmanagement.views import agreement_edit_view
 
@@ -76,6 +77,7 @@ urlpatterns = [
     path('sites_input_view/',sites_input_view,name='sites_input_view'),
     url(r'^sites_edit_view/?(?P<id>[^/]+)/$', sites_edit_view, name="sites_edit_view"),
     url(r'^person_edit_view/?(?P<id>[^/]+)/$', person_edit_view, name="person_edit_view"),
+    url(r'^property_edit_view/?(?P<id>[^/]+)/$', property_edit_view, name="property_edit_view"),
     url(r'^rent_delete_view/?(?P<id>[^/]+)/$', rent_delete_view, name="rent_delete_view"),
     url(r'^rent_delete_view_new/?(?P<id>[^/]+)/$', rent_delete_view_new, name="rent_delete_view_new"),
     url(r'^advance_delete_view/?(?P<id>[^/]+)/$', advance_delete_view, name="advance_delete_view"),

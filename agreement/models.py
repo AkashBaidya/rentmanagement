@@ -131,7 +131,7 @@ class Properties(models.Model):
 
 class Agreement(models.Model):
     id= models.IntegerField(max_length=10000000, primary_key=True),
-    agrm_id=models.CharField(max_length=10,null=True,blank=True,default="hello")
+    agrm_id=models.CharField(max_length=30,null=True,blank=True,default="hello")
     agreement_date = models.DateField(null=True,blank=True)
     # tenure_year=models.IntegerField()
     effected_date_as_actual= models.DateField(null=True,blank=True,verbose_name='Effective date as actual')

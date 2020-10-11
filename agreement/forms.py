@@ -112,6 +112,10 @@ class PropertyForm(forms.ModelForm):
 
         # Always return a value to use as the new cleaned data, even if
         # this method didn't change it.
+class PropertyEditForm(forms.ModelForm):
+    class Meta:
+        model=Properties
+        fields = ['type','desc','status','division','district','thana','postcode','village','property_size','number_of_owner','owner1','percentage_of_first_owner','owner2','percentage_of_second_owner','owner3','percentage_of_third_owner','owner4','percentage_of_fourth_owner','owner5','percentage_of_fifth_owner','number_of_sites','site1','percentage_of_first_site','site2','percentage_of_second_site','site3','percentage_of_third_site','site4','percentage_of_fourth_site']
 
 class AgreementForm(forms.ModelForm):
 
@@ -146,6 +150,10 @@ class AgreementForm(forms.ModelForm):
         model = Agreement
         fields = ['main_site','properties']
 
+class AgreementEditForm(forms.ModelForm):
+    class Meta:
+        model = Agreement
+        fields = ['agrm_id','agreement_date','effected_date_as_actual','effected_date_as_per_agreement','tenure_month','agreement_cat_type','termination_clause','notice_date','notice_period','file_no','total_months','serial_no','main_site','agreement_advance_amount','agreement_security_amount','employee_id','employee_name','employee_designation','employee_phone_number','employee_email','status','interest_rate','properties']
 
 class RentlineForm(forms.ModelForm):
     start_period=forms.DateField(input_formats=['%m-%Y'])

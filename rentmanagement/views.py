@@ -19,6 +19,8 @@ from agreement.forms import AdvancePaymentlineForm
 
 from agreement.forms import SiteEditForm
 from agreement.forms import PersonEditForm
+from agreement.forms import AgreementEditForm
+from agreement.forms import PropertyEditForm
 
 from agreement.models import Agreement
 from agreement.models import Rentline
@@ -156,15 +158,27 @@ def person_edit_view(request,id):
 
 
 @login_required
-def agreement_edit_view(request,id):
-    obj=get_object_or_404(Agreement,id=id)
-    form = AgreementForm(request.POST or None,instance=obj)
+def property_edit_view(request,id):
+    obj=get_object_or_404(Properties,id=id)
+    form = PropertyEditForm(request.POST or None,instance=obj)
     if form.is_valid():
         form.save()
-        return redirect(agreement_detail_view)
+        return redirect(person_view)
     else:
         messages.success(request,"Please try again")
-    return render(request, 'agreement/agreement.html', {'form': form})
+    return render(request, 'agreement/property_update.html', {'form': form})
+
+
+@login_required
+def agreement_edit_view(request,id):
+    obj=get_object_or_404(Agreement,id=id)
+    form = AgreementEditForm(request.POST or None,instance=obj)
+    if form.is_valid():
+        e=form.save()
+        return redirect(agreement_detail_view,pk=e.id)
+    else:
+        messages.success(request,"Please try again")
+    return render(request, 'agreement/agreement_update.html', {'form': form})
 
 
 @login_required

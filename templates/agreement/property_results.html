@@ -32,6 +32,7 @@
                       <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Expiry Date</th> -->
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">division</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Person</th>
+                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Edit</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -42,6 +43,7 @@
                       <td>{{ property.city }}</td>
                       <td>{{ property.division }}</td>
                       <td>{{ property.person }}</td>
+                      <td><a href="/property_edit_view/{{ property.id }}/" >Edit</a></td>
                       <!-- <td>{{ sites.exp_date }}</td> -->
 
                     </tr>
