@@ -6,7 +6,7 @@ from datetime import date
 
 
 class Site(models.Model):
-    site_code= models.CharField(max_length=30)
+    site_code= models.CharField(max_length=4)
     site_extension= models.IntegerField(max_length=20,blank=True,null=True)
     display_area=models.IntegerField(max_length=20,null=True,blank=True,help_text='size of the site in sft',default=0)
     storage_area_inside=models.IntegerField(max_length=20,null=True,blank=True, help_text='size of the site in sft')
@@ -42,7 +42,10 @@ class Site(models.Model):
 
     # address=models.CharField(max_length=100,default="")
     def __str__(self):
-        return self.site_code+'-'+str(self.site_extension)
+        if str(self.site_extension)=='':
+            return self.site_code
+        else:
+            return self.site_code+'-'+str(self.site_extension)
 
 
 
@@ -57,13 +60,13 @@ class Person(models.Model):
     #     ('lessee', 'lessee'),
     #     ('lessor', 'lessor'),
     #     ('witness', 'witness')], )
-    nid=models.CharField(verbose_name='NID',max_length=20,blank=True)
-    tin=models.CharField(verbose_name='TIN',max_length=20)
-    email=models.CharField(max_length=40)
-    phone=models.CharField(max_length=20)
+    nid=models.CharField(verbose_name='NID',null=True,max_length=20,blank=True)
+    tin=models.CharField(verbose_name='TIN',null=True,blank=True,max_length=20)
+    email=models.CharField(max_length=40,null=True,blank=True)
+    phone=models.CharField(max_length=20,null=True,blank=True)
     # address=models.CharField(max_length=450)
     dealing_person_status=models.CharField(max_length=10,verbose_name='Is there any dealing person other than lessor?', choices=[('Yes','Yes'),('No','No')])
-    hasbankinfo=models.CharField(max_length=50)
+    address=models.CharField(max_length=50,blank=True, null=True)
     sis_supplier_code=models.CharField(max_length=50,blank=True,default='RNT')
     name_of_dealing_person=models.CharField(max_length=50,blank=True,null=True)
     phone_number_of_dealing_person=models.CharField(max_length=50,blank=True,null=True)
@@ -79,9 +82,13 @@ class Person(models.Model):
         return self.name
 
 class Properties(models.Model):
-    type=models.CharField(max_length=100,blank=True,null=True)
-    desc=models.CharField(max_length=450, verbose_name='Description',blank=True,null=True)
-    status=models.CharField(max_length=30, blank=True,null=True)
+    type=models.CharField(verbose_name='Availability',max_length=100,blank=True,null=True,choices=[
+        ('available', 'available'),
+        (' not available', ' not available')])
+    desc=models.CharField(max_length=450, verbose_name='Address',blank=True,null=True)
+    status=models.CharField(max_length=30, blank=True,null=True,choices=[
+        ('active', 'active'),
+        (' not active', ' not active')])
 
     property_size = models.IntegerField(max_length=100,help_text='size of the site in sft', blank=True,null=True)
     # area=models.CharField(max_length=20)

@@ -19,12 +19,33 @@ from import_export.admin import ImportExportModelAdmin
 
 # for model in models:
     # admin.site.register(model)
-admin.site.register(Site)
-admin.site.register(Person)
-admin.site.register(Properties)
-admin.site.register(Agreement)
+
+@admin.register(Site)
+class SiteAdmin(ImportExportModelAdmin):
+    pass
+
+@admin.register(Person)
+class PersonAdmin(ImportExportModelAdmin):
+    pass
+
+@admin.register(Properties)
+class PropertiesAdmin(ImportExportModelAdmin):
+    pass
+
+@admin.register(Agreement)
+class AgreementAdmin(ImportExportModelAdmin):
+    pass
+
+@admin.register(Rentline)
+class RentlineAdmin(ImportExportModelAdmin):
+    pass
+
+# admin.site.register(Site)
+# admin.site.register(Person)
+# admin.site.register(Properties)
+# admin.site.register(Agreement)
 # admin.site.register(Rent)
-admin.site.register(Rentline)
+# admin.site.register(Rentline)
 @admin.register(LocalArea)
 class LocalAreaAdmin(ImportExportModelAdmin):
     pass

@@ -69,7 +69,7 @@ class PersonEditForm(forms.ModelForm):
 
     class Meta:
         model = Person
-        fields = ['name','person_type','nid','tin','email','phone','dealing_person_status','hasbankinfo','sis_supplier_code','name_of_dealing_person','phone_number_of_dealing_person','email_of_dealing_person','division','district','thana','postcode','village']
+        fields = ['name','person_type','nid','tin','email','phone','dealing_person_status','address','sis_supplier_code','name_of_dealing_person','phone_number_of_dealing_person','email_of_dealing_person','division','district','thana','postcode','village']
 
 class PropertyForm(forms.ModelForm):
     type=forms.CharField(widget=forms.HiddenInput,required=False)
@@ -139,6 +139,7 @@ class AgreementForm(forms.ModelForm):
     employee_email=forms.EmailField(widget=forms.HiddenInput,required=False)
     employee_designation=forms.CharField(widget=forms.HiddenInput,required=False)
     employee_designation=forms.CharField(widget=forms.HiddenInput,required=False)
+    properties=forms.ModelChoiceField(queryset=Properties.objects.all().filter(type__exact='available'),initial=0)
 
     # agrm_create_date=forms.DateField(input_formats=['%d %m-%Y'])
     # notice_date= forms.DateField(widget=forms.TextInput(attrs={'type': 'date'} ))

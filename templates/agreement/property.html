@@ -244,9 +244,12 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-4">
-          <div id="div_id_type" class="form-group"> <label for="id_type" class=" requiredField">
-              Type<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="text" name="type" maxlength="100" class="textinput textInput form-control" required="" id="id_type"> </div>
+          <div id="div_id_type" class="form-group"> <label for="id_type" class="">
+                Availability
+            </label> <div class=""> <select name="type" class="select form-control" id="id_type"> <option value="" selected="">---------</option> <option value="available">available</option> <option value=" not available"> not available</option>
+
+              </select>
+            </div>
           </div>
 
 
@@ -256,19 +259,21 @@
         </div>
         <!-- /.col -->
         <div class="col-md-4">
-          <div id="div_id_desc" class="form-group"> <label for="id_desc" class=" requiredField">
-              Description<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="text" name="desc" maxlength="450" class="textinput textInput form-control" required="" id="id_desc"> </div>
-          </div>
+          <div id="div_id_desc" class="form-group"> <label for="id_desc" class="">
+                Address
+            </label> <div class=""> <input type="text" name="desc" maxlength="450" class="textinput textInput form-control" id="id_desc"> </div> </div>
         </div>
         <!-- /.col -->
         <!-- </div> -->
         <!-- /.row -->
 
         <div class="col-md-4">
-          <div id="div_id_status" class="form-group"> <label for="id_status" class=" requiredField">
-              Status<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="text" name="status" maxlength="30" class="textinput textInput form-control" required="" id="id_status"> </div>
+          <div id="div_id_status" class="form-group"> <label for="id_status" class="">
+                Status
+            </label> <div class=""> <select name="status" class="select form-control" id="id_status"> <option value="" selected="">---------</option> <option value="active">active</option> <option value=" not active"> not active</option>
+
+              </select>
+            </div>
           </div>
         </div>
 

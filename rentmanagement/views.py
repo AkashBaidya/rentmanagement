@@ -65,7 +65,11 @@ def sites_input_view(request):
         print(form)
         # print(request.POST['site_extension'].value())
         instance=form.save(commit=False)
-        instance.site_extension=check_maximum_extension(request.POST['site_code'])
+        instance.site_code=instance.site_code.upper()
+        if instance.site_type=='STORE':
+            instance.site_extension=check_maximum_extension(request.POST['site_code'])
+        else:
+            print("Hello")
         instance.save()
 
         return redirect(sites_view)
@@ -210,8 +214,9 @@ def person_input_view(request):
         name_of_dealing_person=request.POST['name_of_dealing_person']
         email_of_dealing_person=request.POST['email_of_dealing_person']
         relationship=request.POST['relationship']
+        address=request.POST['address']
 
-        instance=Person(name=name, phone=phone,person_type=person_type,nid=nid, tin=tin, email=email, dealing_person_status=dealing_person_status, division=division, district=district, thana=thana, village=village, postcode=postcode, sis_supplier_code=sis_supplier_code,name_of_dealing_person=name_of_dealing_person,email_of_dealing_person=email_of_dealing_person,relationship=relationship)
+        instance=Person(name=name, phone=phone,person_type=person_type,nid=nid, tin=tin, email=email, dealing_person_status=dealing_person_status, division=division, district=district, thana=thana, village=village, postcode=postcode,address=address, sis_supplier_code=sis_supplier_code,name_of_dealing_person=name_of_dealing_person,email_of_dealing_person=email_of_dealing_person,relationship=relationship)
         instance.save()
         return redirect(person_view)
     return render(request, 'agreement/person.html', {'form': form})
@@ -816,7 +821,7 @@ def update_agreement_status_new_view(request, id):
 def check_maximum_extension(shop_code):
 
 
-    return_value=0
+    return_value=1
     try:
         obj=Site.objects.filter(site_code__contains=shop_code)
         a=obj.aggregate(Max('site_extension'))

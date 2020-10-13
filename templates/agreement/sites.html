@@ -32,7 +32,8 @@
         <div class="col-md-4">
           <div id="div_id_site_code" class="form-group"> <label for="id_site_code" class=" requiredField">
               Site code<span class="asteriskField">*</span> </label>
-            <div class=""> <input type="text" name="site_code" maxlength="30" class="textinput textInput form-control" required="" id="id_site_code"> </div>
+            <div class=""> <input style="text-transform: uppercase" type="text" name="site_code" pattern=".{4,}"   required title="4 characters minimum" maxlength="4" class="textinput textInput form-control" required="" id="id_site_code"> </div>
+            <small id="hint_id_site_size" class="form-text text-muted">Site code Example: DGNB</small>
           </div>
 
 
@@ -104,7 +105,7 @@
   </div>
   <div class="card card-default">
     <div class="card-header">
-      <h3 class="card-title">Storage</h3>
+      <h3 class="card-title">Space Allocation</h3>
 
       <!-- <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
