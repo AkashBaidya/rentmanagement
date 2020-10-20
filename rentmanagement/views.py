@@ -525,6 +525,12 @@ def agreement_input_view(request):
         post.agreement_security_amount=request.POST['agreement_security_amount']
         site1=form['main_site'].value()
         print(site1)
+        print(" test begin")
+        print(post.properties.type)
+        print("test end")
+        post.properties.type='not available'
+        print(post.properties.type)
+        post.properties.save()
         post.agrm_id=create_id_for_agreement(post.main_site,post.file_no,post.serial_no)
         post.save()
         return redirect(agreement_detail_view,pk=post.id)
