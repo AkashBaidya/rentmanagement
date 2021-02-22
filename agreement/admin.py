@@ -40,6 +40,10 @@ class AgreementAdmin(ImportExportModelAdmin):
 class RentlineAdmin(ImportExportModelAdmin):
     pass
 
+@admin.register(AdvancePaymentline)
+class AdvancePaymentlineAdmin(ImportExportModelAdmin):
+    pass
+
 # admin.site.register(Site)
 # admin.site.register(Person)
 # admin.site.register(Properties)
@@ -58,4 +62,4 @@ class SingerAreaAdmin(ImportExportModelAdmin):
 # admin.site.register(Security)
 admin.site.register(Securityline)
 # admin.site.register(AdvancePayment)
-admin.site.register(AdvancePaymentline)
+# admin.site.register(AdvancePaymentline)
