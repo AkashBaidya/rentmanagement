@@ -70,7 +70,15 @@ def sites_input_view(request):
             instance.site_extension=check_maximum_extension(request.POST['site_code'])
         else:
             print("Hello")
+
+        # print("print "+request.user)
+
+        print(request.user)
+        instance.entry_by=request.user.username
         instance.save()
+
+        # instance.entry_by=request.user.username
+
 
         return redirect(sites_view)
     else:
@@ -217,6 +225,7 @@ def person_input_view(request):
         address=request.POST['address']
 
         instance=Person(name=name, phone=phone,person_type=person_type,nid=nid, tin=tin, email=email, dealing_person_status=dealing_person_status, division=division, district=district, thana=thana, village=village, postcode=postcode,address=address, sis_supplier_code=sis_supplier_code,name_of_dealing_person=name_of_dealing_person,email_of_dealing_person=email_of_dealing_person,relationship=relationship)
+        instance.entry_by=request.user.username
         instance.save()
         return redirect(person_view)
     return render(request, 'agreement/person.html', {'form': form})
@@ -320,7 +329,7 @@ def property_input_view(request):
             #
             # instance.site4=request.POST['site4']
             # instance.percentage_of_fourth_site=request.POST['percentage_of_fourth_site']
-
+            post.entry_by=request.user.username
             post.save()
             print("not error")
             print(request.POST['postcode'])
@@ -628,7 +637,23 @@ def agreement_detail_view(request,pk):
     # agreement = get_object_or_404(Agreement,id=pk)
     agreement=Agreement.objects.prefetch_related('rentline').get(id=pk)
 
+
     e = Agreement.objects.get(id=pk)
+
+    e.total_rou=rent_rou
+    e.save()
+
+
+    site_type=e.main_site.site_type
+    property_size=e.properties.property_size
+    owener1=e.properties.owner1
+    sis_supplier_code=owener1.sis_supplier_code
+    area=e.main_site.area
+    print('area'+area)
+    district=e.main_site.district
+
+    division=e.properties.division
+
     rent=e.rentline.all()
     security=e.securityline.all()
     advance=e.advanceline.all()
@@ -638,7 +663,7 @@ def agreement_detail_view(request,pk):
     # print(advance)
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
-    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou})
+    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou,'site_type':site_type,'property_size':property_size,'owner1':owener1,'sis_supplier_code':sis_supplier_code,'area':area,'division':division,'district':district})
 
 @login_required
 def agreement_detail_view_activate(request,pk):

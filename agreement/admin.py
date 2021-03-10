@@ -14,6 +14,8 @@ from .models import LocalArea
 from .models import SingerArea
 
 from import_export.admin import ImportExportModelAdmin
+
+from django.contrib.auth.models import User
 # from django.apps import apps
 # models = apps.get_models()
 
@@ -23,6 +25,12 @@ from import_export.admin import ImportExportModelAdmin
 @admin.register(Site)
 class SiteAdmin(ImportExportModelAdmin):
     pass
+    # def save_model(self,request,obj,form,change):
+    #     if not obj.entry_by:
+    #         obj.entry_by=request.user
+    #     print("from site admin")
+    #
+    #     obj.save()
 
 @admin.register(Person)
 class PersonAdmin(ImportExportModelAdmin):
@@ -38,6 +46,10 @@ class AgreementAdmin(ImportExportModelAdmin):
 
 @admin.register(Rentline)
 class RentlineAdmin(ImportExportModelAdmin):
+    pass
+
+@admin.register(AdvancePaymentline)
+class AdvancePaymentlineAdmin(ImportExportModelAdmin):
     pass
 
 # admin.site.register(Site)
@@ -58,4 +70,4 @@ class SingerAreaAdmin(ImportExportModelAdmin):
 # admin.site.register(Security)
 admin.site.register(Securityline)
 # admin.site.register(AdvancePayment)
-admin.site.register(AdvancePaymentline)
+# admin.site.register(AdvancePaymentline)

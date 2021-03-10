@@ -21,7 +21,7 @@ class SiteForm(forms.ModelForm):
     storage_area_outside=forms.IntegerField(widget=forms.HiddenInput)
     lattitude=forms.DecimalField(widget=forms.HiddenInput)
     longitude=forms.DecimalField(widget=forms.HiddenInput)
-
+    # entry_by=forms.CharField(widget=forms.HiddenInput)
     site_size=forms.IntegerField(widget=forms.HiddenInput)
     district=forms.CharField(widget=forms.HiddenInput)
     area=forms.CharField(widget=forms.HiddenInput)
