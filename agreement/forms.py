@@ -37,7 +37,10 @@ class SiteEditForm(forms.ModelForm):
     class Meta:
         model = Site
         fields = ['site_code','site_extension','display_area','storage_area_inside','storage_area_outside','lattitude','longitude','site_size','district','area','site_type']
-
+        widgets = {
+        'site_code': forms.TextInput(attrs={'readonly': 'readonly'}),
+        'site_extension': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }
 class PersonForm(forms.ModelForm):
     # name = forms.CharField(widget=forms.HiddenInput)
     # person_type=forms.CharField(widget=forms.HiddenInput)
@@ -70,7 +73,9 @@ class PersonEditForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = ['name','person_type','nid','tin','email','phone','dealing_person_status','address','sis_supplier_code','name_of_dealing_person','phone_number_of_dealing_person','email_of_dealing_person','division','district','thana','postcode','village']
-
+        widgets = {
+        'name': forms.TextInput(attrs={'readonly': 'readonly'}),
+        }
 class PropertyForm(forms.ModelForm):
     type=forms.CharField(widget=forms.HiddenInput,required=False)
     desc=forms.CharField(widget=forms.HiddenInput,required=False)
@@ -115,7 +120,7 @@ class PropertyForm(forms.ModelForm):
 class PropertyEditForm(forms.ModelForm):
     class Meta:
         model=Properties
-        fields = ['type','desc','status','division','district','thana','postcode','village','property_size','number_of_owner','owner1','percentage_of_first_owner','owner2','percentage_of_second_owner','owner3','percentage_of_third_owner','owner4','percentage_of_fourth_owner','owner5','percentage_of_fifth_owner','number_of_sites','site1','percentage_of_first_site','site2','percentage_of_second_site','site3','percentage_of_third_site','site4','percentage_of_fourth_site']
+        fields = ['desc','status','division','district','thana','postcode','village','property_size','number_of_owner','owner1','percentage_of_first_owner','owner2','percentage_of_second_owner','owner3','percentage_of_third_owner','owner4','percentage_of_fourth_owner','owner5','percentage_of_fifth_owner','number_of_sites','site1','percentage_of_first_site','site2','percentage_of_second_site','site3','percentage_of_third_site','site4','percentage_of_fourth_site']
 
 class AgreementForm(forms.ModelForm):
 

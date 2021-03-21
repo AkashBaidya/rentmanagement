@@ -61,6 +61,7 @@ class Site(models.Model):
 
 class Person(models.Model):
     name=models.CharField(max_length=100)
+    person_status=models.CharField(max_length=100,default='active')
     person_type=models.CharField(max_length=30,choices=[
         ('Organization', 'Organization'),
         ('Individual', 'Individual'),

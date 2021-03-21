@@ -416,6 +416,31 @@ to get the desired effect
 <script src="{% static 'agreement/js/demo.js' %}"></script>
 <script src="{% static 'agreement/js/pages/dashboard3.js' %}"></script>
 
+
+<script>
+  $("#search").on("keyup", function() {
+     // alert("hello")
+      var value = $(this).val().toUpperCase();
+
+      $("table tr").each(function(index) {
+          if (index !== 0) {
+
+              $row = $(this);
+
+              var id = $row.find("td:first").text().toUpperCase();
+
+              if (id.indexOf(value) !== 0) {
+                  $row.hide();
+              }
+              else {
+                  $row.show();
+              }
+          }
+      });
+  });
+</script>
+
+
 <!-- <script>
 $(document).ready( function () {
     $('#example2').DataTable({

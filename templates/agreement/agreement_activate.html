@@ -68,7 +68,14 @@
                     {% for rent in rent %}
                     <tr>
                       <td>{{ rent.rent_rule_no }}</td>
+                      {% if '1899-12-30' in rent.start_period %}
+
+                      {% else %}
                       <td>{{ rent.start_period }}</td>
+                      {% endif %}
+
+
+
                       <td>{{ rent.end_period}}</td>
                       <td>{{ rent.rent_per_month }}</td>
                       <td>{{ rent.advance_agreement_per_month }}</td>

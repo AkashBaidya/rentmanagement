@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_datepicker_plus',
     'import_export',
+    #new add
+    'django.contrib.humanize'
     # 'user_tags'
 ]
 

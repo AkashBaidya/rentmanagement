@@ -1,4 +1,6 @@
 {% extends 'agreement/basefile.html' %}
+
+{% load humanize %}
 {% block content %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -34,14 +36,14 @@
 
 
                 <!-- <h1>Agreement Id: {{ agreement.from_line_date }}</h1> -->
-                <h1>Agreement Id: {{ agreement.id }}</h1>
+                <h1>Agreement Id: {{ agreement.agrm_id }}</h1>
 
 
-                <p><strong>Agreement Creation Date:</strong> {{ agreement.agreement_date }}</p>
-                <p><strong>Agreement Effective Date:</strong> {{ agreement.effected_date_as_actual }}</p>
-                <p><strong>Agreement Expiry Date:</strong> {{ agreement.expiry_date }}</p>
+                <p><strong>Agreement Creation Date:</strong> {{ agreement.agreement_date}}</p>
+                <p><strong>Agreement Effective Date:</strong> {{ agreement.effected_date_as_actual}}</p>
+                <p><strong>Agreement Expiry Date:</strong> {{ agreement.expiry_date}}</p>
                 <!-- <p><strong>Contact Person</strong> {{ agreement.employee_name}}</p> -->
-                <p><strong>Notice Date:</strong> {{ agreement.notice_date}}</p>
+                <p><strong>Renewal Notification: </strong> {{ agreement.notice_date}}</p>
                 <p><strong>Shop Name:</strong> {{ agreement.main_site}}</p>
 
 
@@ -49,12 +51,16 @@
                 <p><strong>Property Size:</strong> {{ property_size}}</p>
                 <!-- <p><strong>Main Site</strong> {{ agreement.main_site}}</p> -->
                 <p><strong>Owner1:</strong> {{ owner1}}</p>
+                <p><strong>Owner2:</strong> {{ owner2}}</p>
+                <p><strong>Owner3:</strong> {{ owner3}}</p>
+                <p><strong>Owner4:</strong> {{ owner4}}</p>
+                <p><strong>Owner5:</strong> {{ owner5}}</p>
                 <p><strong>Sis Supplier Code:</strong> {{ sis_supplier_code}}</p>
                 <p><strong>Area:</strong> {{area}}</p>
                 <p><strong>District:</strong> {{district}}</p>
                 <p><strong>Divison:</strong> {{division}}</p>
 
-                <p id="total"><strong>Total ROU</strong> {{ agreement.total_rou|stringformat:".2f"}}</p>
+                <p id="total"><strong>Total ROU</strong> {{ agreement.total_rou|stringformat:".0f"|intcomma}}</p>
 
                 <p id="total_tag"><strong>Total ROU</strong> {{ rent_rou }}</p>
                 <p id="status"><strong>Status</strong> {{agreement.status}}</p>
@@ -81,10 +87,24 @@
                     {% for rent in rent %}
                     <tr>
                       <td>{{ rent.rent_rule_no }}</td>
-                      <td>{{ rent.start_period }}</td>
-                      <td>{{ rent.end_period}}</td>
-                      <td>{{ rent.rent_per_month|stringformat:".2f" }}</td>
-                      <td>{{ rent.advance_agreement_per_month |stringformat:".2f"}}</td>
+
+                      {% if rent.start_period|date:'M , Y' == 'Dec , 1899'  %}
+                      <td>0</td>
+
+                      {% else %}
+                      <td>{{ rent.start_period|date:'M , Y' }}</td>
+                      {% endif %}
+
+                      {% if rent.end_period|date:'M , Y' == 'Dec , 1899'  %}
+                      <td>0</td>
+
+                      {% else %}
+                      <td>{{ rent.end_period|date:'M , Y' }}</td>
+                      {% endif %}
+                      <!-- <td>{{ rent.start_period|date:'M , Y' }}</td> -->
+                      <!-- <td>{{ rent.end_period|date:'M , Y'}}</td> -->
+                      <td>{{ rent.rent_per_month|stringformat:".0f"|intcomma }}</td>
+                      <td>{{ rent.advance_agreement_per_month |stringformat:".0f"|intcomma}}</td>
                       <td><a href="/rent_delete_view/{{ rent.id }}/">Delete</a></td>
 
                     </tr>

@@ -646,8 +646,14 @@ def agreement_detail_view(request,pk):
 
     site_type=e.main_site.site_type
     property_size=e.properties.property_size
-    owener1=e.properties.owner1
-    sis_supplier_code=owener1.sis_supplier_code
+    owner1=e.properties.owner1
+    owner2=e.properties.owner2
+    owner3=e.properties.owner3
+    owner4=e.properties.owner4
+    owner5=e.properties.owner5
+
+
+    sis_supplier_code=owner1.sis_supplier_code
     area=e.main_site.area
     print('area'+area)
     district=e.main_site.district
@@ -663,7 +669,7 @@ def agreement_detail_view(request,pk):
     # print(advance)
     # users = User.objects.get(id=pk).prefetch_related('item_set')
     # agreement=agreement.rent
-    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou,'site_type':site_type,'property_size':property_size,'owner1':owener1,'sis_supplier_code':sis_supplier_code,'area':area,'division':division,'district':district})
+    return render(request, 'agreement/agreement_detail.html', context={'agreement': agreement, 'rent':rent,'security':security, 'advance':advance,'rent_rou':rent_rou,'site_type':site_type,'property_size':property_size,'owner1':owner1,'owner2':owner2,'owner3':owner3,'owner4':owner4,'owner5':owner5,'sis_supplier_code':sis_supplier_code,'area':area,'division':division,'district':district})
 
 @login_required
 def agreement_detail_view_activate(request,pk):

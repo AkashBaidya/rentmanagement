@@ -18,7 +18,7 @@
               <div class="col-sm-12 col-md-6">
 
 
-
+<input  margin ='10px' id="search" class="form-control " type="search" placeholder="Search" aria-label="Search">
               </div>
             </div>
             <div class="row">
@@ -26,11 +26,17 @@
                 <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                   <thead>
                     <tr role="row">
+                        <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Property Id</th>
                       <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Site1</th>
+<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Site2</th>
+<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Site3</th>
+<th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Site4</th>
+<!-- <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Site5</th> -->
+
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Owner1</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Property Size</th>
                       <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Expiry Date</th> -->
-                      <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Type</th>
+                      <!-- <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Type</th> -->
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Description</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">Division</th>
                       <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending">District</th>
@@ -41,10 +47,15 @@
                   <tbody>
                     {% for property in all_properties %}
                     <tr>
+                      <td>{{ property.id}}</td>
                       <td>{{ property.site1}}</td>
+                      <td>{{ property.site2}}</td>
+                      <td>{{ property.site3}}</td>
+                      <td>{{ property.site4}}</td>
+                      <!-- <td>{{ property.site5}}</td> -->
                       <td>{{ property.owner1 }}</td>
                       <td>{{ property.property_size }}</td>
-                      <td>{{ property.type }}</td>
+                      <!-- <td>{{ property.type }}</td> -->
                       <td>{{ property.description }}</td>
                       <td>{{ property.division }}</td>
                       <td>{{ property.district }}</td>
